@@ -1,0 +1,360 @@
+[
+  {
+    "id": "vibecoding__accelerator__end-to-end",
+    "title": "Data Product Accelerator — de schema CSV a data products gobernados en Databricks (vibe-coding)",
+    "repo": "databricks-solutions/vibe-coding-workshop-template",
+    "repo_local": "repos/vibe-coding-workshop-template",
+    "source_url": "https://github.com/databricks-solutions/vibe-coding-workshop-template/tree/main/data_product_accelerator",
+    "path": "data_product_accelerator/",
+    "type": "project",
+    "scope": "end-to-end",
+    "difficulty": "advanced",
+    "difficulty_source": "inferred",
+    "stack": [
+      "Databricks",
+      "Unity Catalog",
+      "Delta Lake / DLT",
+      "PySpark",
+      "Databricks SQL",
+      "Metric Views",
+      "Table-Valued Functions",
+      "Genie Spaces",
+      "AI/BI Dashboards",
+      "Lakehouse Monitoring",
+      "MLflow",
+      "Databricks Asset Bundles (DAB)",
+      "SKILL.md / agent skills"
+    ],
+    "cloud": [
+      "Databricks-pure"
+    ],
+    "rubro": [
+      "data platform",
+      "lakehouse",
+      "AI-assisted engineering"
+    ],
+    "evaluates": [
+      "arquitectura medallion completa (bronze→silver→gold) con enfoque design-first",
+      "modelado dimensional gold (dims/facts, SCD1/2, grain, conformed dims, ERDs)",
+      "capa semántica para self-service BI: Metric Views, TVFs y Genie Spaces sobre el modelo gold",
+      "gobierno con Unity Catalog (constraints, naming/tagging, table properties)",
+      "calidad de datos (DLT expectations, DQX) y observabilidad (monitors, dashboards AI/BI, alerts)",
+      "despliegue reproducible con Databricks Asset Bundles + extensión a ML y GenAI agents",
+      "ingeniería asistida por IA con skills SKILL.md portables (Claude Code/Cursor/Copilot)"
+    ],
+    "requirements": [
+      "partir de un schema CSV de cliente (Wanderbricks_Schema.csv) y diseñar primero el modelo gold",
+      "ejecutar las 9 etapas (gold design → bronze → silver → gold impl → planning → semantic → observability → ML → GenAI agents), una conversación por etapa",
+      "generar la capa semántica (Metric Views + TVFs + Genie Space) y validarla con preguntas benchmark",
+      "desplegar todo vía bundle deploy --target dev"
+    ],
+    "diagram": "graph LR\n  CSV[Customer Schema CSV] --> GD[Gold Design<br/>dim model · ERDs · YAML]\n  GD --> BR[Bronze<br/>source tables + test data]\n  BR --> SV[Silver<br/>DLT + DQ]\n  SV --> GI[Gold Impl<br/>tables · MERGE · FK constraints]\n  GI --> PL[Planning<br/>phase plans · manifests]\n  PL --> SM[Semantic Layer<br/>Metric Views · TVFs · Genie]\n  SM --> OB[Observability<br/>monitors · AI/BI dashboards · alerts]\n  OB --> ML[ML<br/>MLflow train/inference]\n  ML --> AG[GenAI Agents<br/>build · eval · deploy]\n  SM -.self-service NL.-> Analyst((Data Analyst))",
+    "has_statement": true,
+    "has_solution": true,
+    "solution_loc": "data_product_accelerator/skills/ (55 SKILL.md con patrones de referencia + scripts/templates runnable) · QUICKSTART.md (guía de 9 etapas) · README.md",
+    "self_validating": false,
+    "runnable": "databricks",
+    "est_minutes": 600,
+    "preview": "Framework oficial de databricks-solutions para construir data products gobernados de punta a punta con un asistente de IA: 55 agent skills llevan de un schema CSV a modelo dimensional gold, pipelines de calidad, capa semántica (Metric Views/TVFs/Genie), observabilidad, ML y agentes GenAI, todo desplegado con Asset Bundles.",
+    "portfolio_value": "Demuestra dominio del stack lakehouse completo y, especialmente, de la capa de consumo analítico (semantic layer + Genie) que conecta data engineering con self-service BI. Pieza estrella DE+DA: arquitectura medallion design-first, gobierno con UC y entrega de productos de datos consumibles por analistas en lenguaje natural.",
+    "notes": "Repo template oficial databricks-solutions, branch main. El accelerator vive en data_product_accelerator/; artefactos generados se crean en la raíz del repo (gold_layer_design/, src/, plans/, resources/). Skills en formato abierto SKILL.md (agentskills.io), portables entre IDEs."
+  },
+  {
+    "id": "vibecoding__metric-views",
+    "title": "Metric Views en Databricks — capa semántica de métricas para Genie y AI/BI",
+    "repo": "databricks-solutions/vibe-coding-workshop-template",
+    "repo_local": "repos/vibe-coding-workshop-template",
+    "source_url": "https://github.com/databricks-solutions/vibe-coding-workshop-template/blob/main/data_product_accelerator/skills/semantic-layer/01-metric-views-patterns/SKILL.md",
+    "path": "data_product_accelerator/skills/semantic-layer/01-metric-views-patterns/",
+    "type": "project",
+    "scope": "micro",
+    "difficulty": "intermediate",
+    "difficulty_source": "inferred",
+    "stack": [
+      "Databricks",
+      "Metric Views (YAML)",
+      "Unity Catalog",
+      "Databricks SQL",
+      "Genie",
+      "AI/BI",
+      "Databricks Asset Bundles"
+    ],
+    "cloud": [
+      "Databricks-pure"
+    ],
+    "rubro": [
+      "business intelligence",
+      "semantic layer",
+      "self-service analytics"
+    ],
+    "evaluates": [
+      "definir métricas reutilizables y versionadas en YAML (measures, dimensions, joins)",
+      "modelar relaciones (incl. snowflake schema) para que las métricas crucen tablas correctamente",
+      "agregar metadata semántica que mejore la calidad de las consultas en lenguaje natural de Genie",
+      "validar referencias de esquema y la vista antes de desplegar (validation queries / level-of-detail)",
+      "desplegar Metric Views como notebook_task vía Asset Bundle"
+    ],
+    "requirements": [
+      "crear uno o más Metric Views YAML sobre el modelo gold con measures y dimensions",
+      "validar el schema con validate_metric_view.py y las validation-queries de referencia",
+      "desplegar con bundle deploy --target dev y confirmar disponibilidad para Genie/AI-BI"
+    ],
+    "diagram": null,
+    "has_statement": true,
+    "has_solution": true,
+    "solution_loc": "scripts/create_metric_views.py · scripts/validate_metric_view.py · assets/templates/metric-view-template.yaml · references/ (yaml-reference, advanced-patterns, querying-metric-views, validation-queries, level-of-detail)",
+    "self_validating": false,
+    "runnable": "databricks",
+    "est_minutes": 90,
+    "preview": "Patrones para crear Metric Views de Databricks: la capa semántica gobernada donde se definen las métricas de negocio una sola vez (en YAML) para alimentar Genie y AI/BI con metadata que mejora las consultas en lenguaje natural.",
+    "portfolio_value": "Valor DA puro: el Metric View es el 'single source of truth' de KPIs que un analista consume sin reescribir lógica. Demuestra capacidad de gobernar definiciones de métricas, modelar joins y habilitar self-service analytics fiable.",
+    "notes": "SKILL.md v2.0, branch main. Trae scripts y templates runnable (create/validate). Extiende databricks-solutions/ai-dev-kit + docs oficiales de business-semantics/metric-views."
+  },
+  {
+    "id": "vibecoding__table-valued-functions",
+    "title": "Table-Valued Functions (TVFs) en Databricks optimizadas para Genie",
+    "repo": "databricks-solutions/vibe-coding-workshop-template",
+    "repo_local": "repos/vibe-coding-workshop-template",
+    "source_url": "https://github.com/databricks-solutions/vibe-coding-workshop-template/blob/main/data_product_accelerator/skills/semantic-layer/02-databricks-table-valued-functions/SKILL.md",
+    "path": "data_product_accelerator/skills/semantic-layer/02-databricks-table-valued-functions/",
+    "type": "project",
+    "scope": "micro",
+    "difficulty": "intermediate",
+    "difficulty_source": "inferred",
+    "stack": [
+      "Databricks",
+      "Databricks SQL",
+      "Table-Valued Functions",
+      "Unity Catalog",
+      "Genie",
+      "Databricks Asset Bundles"
+    ],
+    "cloud": [
+      "Databricks-pure"
+    ],
+    "rubro": [
+      "business intelligence",
+      "semantic layer",
+      "self-service analytics"
+    ],
+    "evaluates": [
+      "traducir preguntas de negocio a TVFs parametrizadas reutilizables por Genie",
+      "respetar requisitos de Genie (parámetros STRING, orden de parámetros, workaround de LIMIT)",
+      "comentarios v3.0 en formato bullet, null safety, manejo de SCD2 y prevención de productos cartesianos",
+      "validar TVFs post-deploy con validate_tvfs.sql y desplegar vía Asset Bundle"
+    ],
+    "requirements": [
+      "levantar requisitos desde preguntas de negocio (tvf-requirements-template.md / tvf-planning-guide.md)",
+      "implementar las TVFs (tvf-template.sql / create_tvfs.py) con parámetros STRING Genie-compatibles",
+      "desplegar con bundle deploy --target dev y validar con scripts/validate_tvfs.sql"
+    ],
+    "diagram": null,
+    "has_statement": true,
+    "has_solution": true,
+    "solution_loc": "scripts/validate_tvfs.sql · assets/templates/create_tvfs.py · assets/templates/tvf-template.sql · references/ (tvf-examples con 5 ejemplos de dominio, tvf-patterns, genie-integration)",
+    "self_validating": false,
+    "runnable": "databricks",
+    "est_minutes": 90,
+    "preview": "Guía end-to-end para planear, crear, desplegar y validar Table-Valued Functions en Databricks optimizadas para consultas en lenguaje natural de Genie Spaces: parámetros STRING, orden, LIMIT workaround y 5 ejemplos de dominio.",
+    "portfolio_value": "Valor DA: las TVFs encapsulan lógica analítica parametrizada que Genie puede invocar, dando respuestas precisas a preguntas de negocio sin SQL del analista. Demuestra diseño de interfaces de consulta gobernadas y compatibilidad fina con el motor NL.",
+    "notes": "SKILL.md v2.0, branch main. Assets runnable (SQL + Python templates + validador). Parámetros STRING obligatorios por compatibilidad con Genie."
+  },
+  {
+    "id": "vibecoding__genie-space-patterns",
+    "title": "Genie Space patterns — instrucciones, trusted assets y benchmarks para analítica conversacional",
+    "repo": "databricks-solutions/vibe-coding-workshop-template",
+    "repo_local": "repos/vibe-coding-workshop-template",
+    "source_url": "https://github.com/databricks-solutions/vibe-coding-workshop-template/blob/main/data_product_accelerator/skills/semantic-layer/03-genie-space-patterns/SKILL.md",
+    "path": "data_product_accelerator/skills/semantic-layer/03-genie-space-patterns/",
+    "type": "project",
+    "scope": "micro",
+    "difficulty": "intermediate",
+    "difficulty_source": "inferred",
+    "stack": [
+      "Databricks",
+      "Genie Spaces",
+      "Databricks SQL",
+      "Metric Views",
+      "Table-Valued Functions",
+      "Unity Catalog",
+      "Serverless SQL Warehouse"
+    ],
+    "cloud": [
+      "Databricks-pure"
+    ],
+    "rubro": [
+      "conversational analytics",
+      "self-service BI",
+      "semantic layer"
+    ],
+    "evaluates": [
+      "estructurar un Genie Space (deliverable de 8 secciones, General Instructions ≤20 líneas)",
+      "organizar data assets por prioridad (Metric Views → TVFs → Tables) y definir sql_snippets (KPIs/filtros/dimensiones)",
+      "escribir benchmark questions con SQL exacto y correr regresión de benchmarks",
+      "asegurar comentarios de tabla/columna para calidad del SQL generado y auditar drift post-deploy",
+      "validar el espacio programáticamente con la Conversation API"
+    ],
+    "requirements": [
+      "configurar un Genie Space con instrucciones de agente, data assets y SQL expressions",
+      "definir preguntas benchmark con SQL esperado y validarlas vía Conversation API (audit_genie_space.py)",
+      "ejecutar la regresión de benchmarks (genie-space-regression-test.py) sobre Serverless SQL Warehouse"
+    ],
+    "diagram": null,
+    "has_statement": true,
+    "has_solution": true,
+    "solution_loc": "scripts/audit_genie_space.py · assets/templates/genie-space-config.yaml · assets/templates/genie-space-regression-test.py · references/ (agent-instructions, trusted-assets, benchmark-intake-workflow, configuration-guide, genie_space_export*.json)",
+    "self_validating": false,
+    "runnable": "databricks",
+    "est_minutes": 75,
+    "preview": "Patrones para diseñar Genie Spaces de Databricks: estructura de 8 secciones, jerarquía de trusted assets (Metric Views → TVFs → Tables), SQL expressions, preguntas benchmark con SQL exacto y testing de regresión para analítica en lenguaje natural.",
+    "portfolio_value": "Valor DA destacado: el Genie Space es la cara de self-service del producto de datos. Demuestra cómo curar assets de confianza, instruir al agente y garantizar respuestas correctas con benchmarks — la diferencia entre un chatbot que adivina y uno que responde con SQL validado.",
+    "notes": "SKILL.md v2.6, branch main. Incluye scripts de auditoría/regresión y exports JSON de ejemplo. Serverless SQL Warehouse obligatorio; el JSON del espacio se despliega vía el skill 04 (RULE_8 tiers)."
+  },
+  {
+    "id": "vibecoding__genie-export-import-api",
+    "title": "Genie Space Export/Import API — despliegue programático y CI/CD de espacios Genie",
+    "repo": "databricks-solutions/vibe-coding-workshop-template",
+    "repo_local": "repos/vibe-coding-workshop-template",
+    "source_url": "https://github.com/databricks-solutions/vibe-coding-workshop-template/blob/main/data_product_accelerator/skills/semantic-layer/04-genie-space-export-import-api/SKILL.md",
+    "path": "data_product_accelerator/skills/semantic-layer/04-genie-space-export-import-api/",
+    "type": "project",
+    "scope": "micro",
+    "difficulty": "advanced",
+    "difficulty_source": "inferred",
+    "stack": [
+      "Databricks",
+      "Genie Spaces",
+      "Genie REST API",
+      "Databricks Asset Bundles",
+      "Python (SDK/requests)",
+      "CI/CD"
+    ],
+    "cloud": [
+      "Databricks-pure"
+    ],
+    "rubro": [
+      "conversational analytics",
+      "platform engineering",
+      "MLOps/CI-CD"
+    ],
+    "evaluates": [
+      "entender el schema GenieSpaceExport y el formato de serialización (serialized_space)",
+      "usar los endpoints List/Get/Create/Update/Delete de la API de Genie",
+      "generación inventory-driven con sustitución de variables (ID generation, per-user prefix, warehouse_id baked at deploy)",
+      "implementar CI/CD de Genie Spaces con el modelo de tiers RULE_8 (bundle nativo → job de provisioning → createAsset+PATCH dev loop)"
+    ],
+    "requirements": [
+      "exportar un Genie Space existente con export_genie_space.py y entender su JSON",
+      "crear/actualizar espacios programáticamente con import/deploy scripts vía REST API",
+      "persistir el JSON en el bundle y reproducirlo con un job (evitar el orphan space sin JSON versionado)"
+    ],
+    "diagram": null,
+    "has_statement": true,
+    "has_solution": true,
+    "solution_loc": "scripts/export_genie_space.py · scripts/import_genie_space.py · assets/templates/deploy_genie_spaces.py · assets/templates/genie-deployment-job-template.yml · assets/templates/validate_genie_benchmark_sql.py · references/api-reference.md · references/workflow-patterns.md",
+    "self_validating": false,
+    "runnable": "databricks",
+    "est_minutes": 120,
+    "preview": "Patrones para exportar/importar Genie Spaces vía REST API: schema GenieSpaceExport completo, endpoints, generación inventory-driven con sustitución de variables y CI/CD con el modelo de tiers RULE_8 para despliegue reproducible y versionado.",
+    "portfolio_value": "Puente DA↔plataforma: lleva el Genie Space de artefacto manual a recurso versionado y desplegable por pipeline. Demuestra madurez de ingeniería sobre la capa de consumo analítico (API, IaC con Asset Bundles, CI/CD) — diferencial frente a quien solo configura Genie por UI.",
+    "notes": "SKILL.md v1.0, branch main. Scripts export/import + templates de job de despliegue y validación de benchmark SQL. Modelo RULE_8: bundle nativo (T1) → job (T2) → createAsset+PATCH dev loop (T3, solo Genie-Code con JSON persistido)."
+  },
+  {
+    "id": "vibecoding__gold-layer-design",
+    "title": "Gold Layer Design — modelado dimensional, ERDs y schemas YAML design-first",
+    "repo": "databricks-solutions/vibe-coding-workshop-template",
+    "repo_local": "repos/vibe-coding-workshop-template",
+    "source_url": "https://github.com/databricks-solutions/vibe-coding-workshop-template/blob/main/data_product_accelerator/skills/gold/00-gold-layer-design/SKILL.md",
+    "path": "data_product_accelerator/skills/gold/00-gold-layer-design/",
+    "type": "project",
+    "scope": "micro",
+    "difficulty": "advanced",
+    "difficulty_source": "inferred",
+    "stack": [
+      "Databricks",
+      "Dimensional modeling (Kimball)",
+      "Mermaid ERDs",
+      "YAML schemas",
+      "Unity Catalog",
+      "Delta Lake"
+    ],
+    "cloud": [
+      "Databricks-pure"
+    ],
+    "rubro": [
+      "data modeling",
+      "data warehouse",
+      "analytics engineering"
+    ],
+    "evaluates": [
+      "diseñar el modelo dimensional gold a partir del schema del cliente (grain, dims, facts, conformed dims)",
+      "crear ERDs Mermaid organizados (master/domain/summary según número de tablas)",
+      "generar schemas YAML, lineage a nivel columna y guía de onboarding de negocio",
+      "validar el diseño con checklists antes de implementar"
+    ],
+    "requirements": [
+      "partir de Wanderbricks_Schema.csv y producir el modelo dimensional + ERDs + YAML en gold_layer_design/",
+      "documentar lineage de columnas (generate_lineage_csv.py) y mapeo de tablas fuente",
+      "pasar las validation-checklists antes de bajar a gold-layer-setup"
+    ],
+    "diagram": null,
+    "has_statement": true,
+    "has_solution": true,
+    "solution_loc": "scripts/generate_lineage_csv.py · assets/templates/ (column-lineage, source-table-mapping, business-onboarding, design-decisions) · references/ (dimensional-modeling-guide, erd-organization-strategy, yaml-schema-patterns, validation-checklists)",
+    "self_validating": false,
+    "runnable": "databricks",
+    "est_minutes": 150,
+    "preview": "Orquestador de diseño del Gold layer: del schema CSV del cliente al modelo dimensional con ERDs Mermaid, schemas YAML, lineage a nivel columna y documentación de negocio — enfoque design-first (diseñar el target antes de construir bronze/silver).",
+    "portfolio_value": "Núcleo del analytics engineering: demuestra modelado dimensional Kimball riguroso (grain, conformed dims, SCD), documentación de lineage y comunicación con negocio vía ERDs. Base sobre la que se monta toda la capa semántica/DA.",
+    "notes": "SKILL.md v3.0.0, branch main. Orquesta los design-workers (grain, dimension/fact patterns, conformed dims, 05-erd-diagrams, table-documentation, design-validation). En Genie Code escribe bajo {REPO_ROOT}/gold_layer_design/."
+  },
+  {
+    "id": "vibecoding__gold-merge-patterns",
+    "title": "Gold MERGE patterns — Silver→Gold upserts, SCD Type 1/2 y agregación de hechos",
+    "repo": "databricks-solutions/vibe-coding-workshop-template",
+    "repo_local": "repos/vibe-coding-workshop-template",
+    "source_url": "https://github.com/databricks-solutions/vibe-coding-workshop-template/blob/main/data_product_accelerator/skills/gold/pipeline-workers/02-merge-patterns/SKILL.md",
+    "path": "data_product_accelerator/skills/gold/pipeline-workers/02-merge-patterns/",
+    "type": "project",
+    "scope": "micro",
+    "difficulty": "advanced",
+    "difficulty_source": "inferred",
+    "stack": [
+      "Databricks",
+      "Delta Lake MERGE",
+      "PySpark",
+      "SCD Type 1/2",
+      "Unity Catalog",
+      "Databricks Asset Bundles"
+    ],
+    "cloud": [
+      "Databricks-pure"
+    ],
+    "rubro": [
+      "data engineering",
+      "data warehouse",
+      "ETL/ELT"
+    ],
+    "evaluates": [
+      "implementar MERGE Silver→Gold con column mapping y schema evolution",
+      "patrones SCD Type 1 y Type 2 para dimensiones, con manejo de columnas YAML-only (lit(None) placeholders)",
+      "agregación de fact tables y variantes (accumulating/periodic snapshot, factless, junk dimension)",
+      "evitar conflictos de naming de variables con funciones PySpark y troubleshooting de errores de MERGE"
+    ],
+    "requirements": [
+      "escribir scripts de MERGE Silver→Gold a partir de los templates por patrón (scd-type1/2, fact aggregation, snapshots)",
+      "garantizar que la vista source seleccione todas las columnas Gold (placeholders lit(None) para YAML-only)",
+      "desplegar el merge job vía bundle deploy --target dev"
+    ],
+    "diagram": null,
+    "has_statement": true,
+    "has_solution": true,
+    "solution_loc": "assets/templates/ (scd-type1-merge.py, scd-type2-merge.py, fact-table-aggregation-merge.py, accumulating-snapshot-merge.py, periodic-snapshot-merge.py, factless-fact-merge.py, junk-dimension-populate.py)",
+    "self_validating": false,
+    "runnable": "databricks",
+    "est_minutes": 120,
+    "preview": "Patrones production-grade de MERGE para poblar el Gold layer desde Silver: SCD Type 1/2, agregación de hechos, snapshots acumulativos/periódicos, factless y junk dimensions, con column mapping, schema evolution y prevención de conflictos de naming PySpark.",
+    "portfolio_value": "Demuestra dominio del corazón del DW en Delta: upserts idempotentes, historización SCD y construcción de fact tables. 7 templates runnable cubren los patrones dimensionales clave que diferencian a un DE de warehouse de uno que solo hace ingest.",
+    "notes": "SKILL.md branch main. 7 templates .py por patrón. Worker consumido por los Gold merge jobs (notebook_task); el src view debe .select() cada columna Gold con lit(None) para columnas solo-YAML."
+  }
+]

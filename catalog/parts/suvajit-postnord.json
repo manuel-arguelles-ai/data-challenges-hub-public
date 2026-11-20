@@ -1,0 +1,103 @@
+[
+  {
+    "id": "suvajit__ecommerce-medallion",
+    "title": "E-commerce Medallion ETL Pipeline (Bronze/Silver/Gold) con Auto Loader, Delta y DABs",
+    "repo": "Suvajit-Bhattacharjee/databricks-medallion-etl-pipeline",
+    "repo_local": "repos/databricks-medallion-etl-pipeline",
+    "source_url": "https://github.com/Suvajit-Bhattacharjee/databricks-medallion-etl-pipeline/blob/main/README.md",
+    "path": "README.md",
+    "type": "project",
+    "scope": "end-to-end",
+    "difficulty": "intermediate",
+    "difficulty_source": "inferred",
+    "stack": [
+      "Databricks",
+      "PySpark",
+      "Delta Lake",
+      "Spark Structured Streaming",
+      "Databricks Auto Loader",
+      "Databricks Asset Bundles (DABs)",
+      "DBFS",
+      "Python"
+    ],
+    "cloud": ["Databricks-pure"],
+    "rubro": ["e-commerce"],
+    "evaluates": [
+      "Medallion architecture (Bronze/Silver/Gold)",
+      "Ingesta incremental con Auto Loader",
+      "Streaming ETL con checkpoints/fault tolerance",
+      "Limpieza, type casting y data quality en Silver",
+      "Agregaciones business-ready en Gold",
+      "Despliegue como codigo con Databricks Asset Bundles",
+      "Gestion de entornos dev/prod y reproducibilidad"
+    ],
+    "requirements": [
+      "Generar datos mock de ventas e-commerce in-notebook (00_Setup_and_Data_Generation)",
+      "Ingerir CSV crudos a la tabla bronze_sales_table via Auto Loader (Delta)",
+      "Transformar Bronze->Silver: type cast, trim, filtrar registros invalidos, derivar total_amount",
+      "Agregar Silver->Gold: ventas diarias y cantidades por producto/tienda",
+      "Definir el job multi-tarea y desplegarlo con databricks bundle deploy -t dev",
+      "Ejecutar queries de ejemplo y limpiar streams/tablas/checkpoints (04_Query_and_Cleanup)"
+    ],
+    "diagram": "flowchart LR\n    A[Mock CSV ventas\\nFileStore raw_sales_data] -->|Auto Loader| B[Bronze\\nbronze_sales_table\\nDelta - datos crudos]\n    B -->|Structured Streaming\\nclean + cast + filtros| C[Silver\\nsilver_sales_table\\nDelta - validado + total_amount]\n    C -->|Structured Streaming\\nagregaciones| D[Gold\\ngold_sales_summary_table\\nDelta - business-ready]\n    D --> E[BI / Analytics]\n    F[Databricks Asset Bundles\\ndatabricks.yml] -.deploy dev/prod.-> B & C & D",
+    "has_statement": true,
+    "has_solution": true,
+    "solution_loc": "notebooks/",
+    "self_validating": false,
+    "runnable": "databricks",
+    "est_minutes": 240,
+    "preview": "Pipeline e-commerce end-to-end self-contained en Databricks: genera datos mock in-notebook, los ingiere con Auto Loader a Bronze (Delta), limpia y valida en Silver, agrega en Gold, y despliega todo el job como codigo con Databricks Asset Bundles (dev/prod).",
+    "portfolio_value": "Muestra dominio del patron Medallion completo sobre Databricks puro con streaming, data quality y deploy-as-code (DABs). Excelente pieza de portafolio porque es reproducible sin infra externa: incluye solucion completa en 5 notebooks y limpieza automatica del workspace.",
+    "notes": "Proyecto self-contained con solucion incluida (notebooks 00-04). Usa DBFS/FileStore para simular cloud storage; outputMode complete en Gold por simplicidad (el README reconoce que produccion usaria watermarks/MERGE). databricks.yml define targets dev/prod. Autor: Suvajit Bhattacharjee."
+  },
+  {
+    "id": "postnord__take-home-aws-glue",
+    "title": "PostNord Take-home: deduplicar reviews de Amazon y exponer en Athena via AWS Glue",
+    "repo": "analytics-automation/data-engineer-take-home-assignment",
+    "repo_local": "repos/data-engineer-take-home-assignment",
+    "source_url": "https://github.com/analytics-automation/data-engineer-take-home-assignment/blob/main/README.md",
+    "path": "README.md",
+    "type": "take-home",
+    "scope": "end-to-end",
+    "difficulty": "intermediate",
+    "difficulty_source": "inferred",
+    "stack": [
+      "AWS Glue",
+      "PySpark",
+      "Glue DynamicFrame",
+      "Amazon S3",
+      "AWS Glue Data Catalog",
+      "Amazon Athena",
+      "Parquet"
+    ],
+    "cloud": ["AWS"],
+    "rubro": ["logistica", "postal"],
+    "evaluates": [
+      "Deduplicacion por claves de negocio (reviewerId, asin, reviewTime)",
+      "Lectura CSV/JSON a PySpark DataFrame / Glue DynamicFrame",
+      "Agregaciones estadisticas (avg/median de helpful y overall)",
+      "Particionado temporal en S3 (year/month/day/hour) desde unixReviewTime",
+      "Escritura a S3 + registro en Glue Data Catalog (getSink enableUpdateCatalog)",
+      "Consultabilidad via Athena sin crawler",
+      "Decisiones de diseno y trade-offs bajo restriccion de ~2h"
+    ],
+    "requirements": [
+      "Leer el dataset Amazon Musical Instruments Reviews (CSV o JSON) desde S3",
+      "Eliminar filas duplicadas con mismos reviewerId, asin y reviewTime",
+      "Tabla 1: por particion horaria (unixReviewTime) calcular avg/median de helpful y avg/median de overall; particionar en S3 output/table_1/<version>/<year>/<month>/<day>/<hour>",
+      "Tabla 2: por producto (asin) avg/median overall, reviewers unicos, avg/median largo de summary; escribir a output/table_2/<version>",
+      "Escribir ambas tablas a S3 y registrarlas en la Glue DB amzn-music-reviews-curated via glueContext.getSink",
+      "Elegir formato consultable por Athena (p.ej. Parquet) y validar las tablas en Athena"
+    ],
+    "diagram": "flowchart LR\n    A[Input en S3\\nMusical_Instruments_5.json /\\nMusical_instruments_reviews.csv] --> B[AWS Glue Job\\nPySpark / DynamicFrame]\n    B --> C[Dedupe\\nreviewerId + asin + reviewTime]\n    C --> D[Tabla 1\\navg/median helpful + overall\\nparticionado por hora]\n    C --> E[Tabla 2\\nstats por producto asin]\n    D -->|getSink enableUpdateCatalog| F[S3 output/table_1\\n+ Glue Catalog]\n    E -->|getSink enableUpdateCatalog| G[S3 output/table_2\\n+ Glue Catalog]\n    F --> H[Athena SQL]\n    G --> H",
+    "has_statement": true,
+    "has_solution": false,
+    "solution_loc": null,
+    "self_validating": false,
+    "runnable": "local",
+    "est_minutes": 120,
+    "preview": "Take-home real de empleador (PostNord, equipo Analytics & Automation): construir un Glue Job en PySpark que deduplica reviews de Amazon Musical Instruments, produce dos tablas analiticas (tendencias horarias de helpful/overall y stats por producto), las escribe a S3 y las registra en el Glue Data Catalog para consultarlas con Athena. Disenado para ~2h.",
+    "portfolio_value": "Unica prueba de un empleador real confirmada del set, con enunciado autentico (PostNord, logistica/postal nordica) y restriccion explicita de ~2h. Ejercita dedupe, agregaciones con median, particionado temporal en S3 y registro en catalogo para Athena: skills de Data Engineering plenamente transferibles aunque el runtime sea Glue y no Databricks.",
+    "notes": "Es el UNICO take-home de empleador real confirmado del set. Usa AWS Glue (no Databricks), pero ejercita skills DE equivalentes (PySpark, dedupe, agregaciones, particionado, catalogo/Athena). Sin solucion: el candidato la resuelve (solo README/enunciado en el repo). Dataset = Amazon Musical Instruments Reviews (Kaggle), ya cargado en S3. runnable marcado 'local' (Glue/PySpark; AWS real opcional). Contactos del enunciado: Felix y Amarnath @ postnord.com. Changelog: primera version 2022-05-12."
+  }
+]

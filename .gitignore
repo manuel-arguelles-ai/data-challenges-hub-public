@@ -1,0 +1,12 @@
+.env
+.env.*
+!.env.example
+*.key
+.groq_key
+__pycache__/
+*.pyc
+.DS_Store
+.playwright-mcp/
+deploy/
+repos/
+lab/_*.html

@@ -1,0 +1,167 @@
+[
+  {
+    "id": "mlops__oreilly-hotel-booking-end-to-end",
+    "title": "MLOps with Databricks (O'Reilly) - Ciclo MLOps End-to-End de Prediccion de Precio de Hotel Booking con LightGBM, MLflow, Unity Catalog, Model/Feature Serving, Asset Bundles y Lakehouse Monitoring",
+    "repo": "mvechtomova/oreilly-mlops-with-databricks",
+    "repo_local": "repos/oreilly-mlops-with-databricks",
+    "source_url": "https://github.com/mvechtomova/oreilly-mlops-with-databricks/tree/main/mlops",
+    "path": "mlops",
+    "type": "project",
+    "scope": "end-to-end",
+    "difficulty": "advanced",
+    "difficulty_source": "inferred",
+    "stack": [
+      "Databricks",
+      "MLflow (tracking + model registry)",
+      "Unity Catalog (Models in UC, 3-level namespace)",
+      "LightGBM (LGBMRegressor)",
+      "scikit-learn (Pipeline + ColumnTransformer)",
+      "Databricks Feature Store / Feature Engineering",
+      "Feature Serving (online feature lookup)",
+      "Databricks Model Serving (endpoints + A/B testing)",
+      "MLflow pyfunc custom model wrapper",
+      "Databricks Asset Bundles / Declarative Automation Bundles",
+      "Lakeflow Jobs (orquestacion)",
+      "Lakehouse Monitoring (data quality + drift)",
+      "SQL Alerts",
+      "Service Principals (endpoint auth)",
+      "uv (dependency mgmt) + Python 3.12",
+      "pydantic config (ProjectConfig)",
+      "pytest"
+    ],
+    "cloud": [
+      "Databricks-pure"
+    ],
+    "rubro": [
+      "hoteleria/booking",
+      "travel"
+    ],
+    "evaluates": "Ciclo MLOps completo de punta a punta en Databricks para un caso de prediccion de precio promedio de reservas de hotel (regresion con LightGBM). Cubre los capitulos 2-6 del libro O'Reilly: (2) preprocesamiento de datos sobre el dataset booking.csv hacia tablas Delta en Unity Catalog; (3) experiment tracking con MLflow, entrenamiento/fine-tuning de un pipeline sklearn+LightGBM, logging con firma inferida y registro del modelo en Unity Catalog (namespace catalog.schema.model por entorno dev/acc/prd); (4) Model Serving y Feature Serving con feature lookup online, A/B testing entre versiones y autenticacion de endpoints via service principals; (5) CI/CD con Databricks Asset Bundles que despliegan Lakeflow Jobs (preprocess, train+register, deploy) por entorno; (6) Lakehouse Monitoring para calidad de datos y deteccion de drift con un job de refresh de la tabla de monitoreo y un SQL Alert sobre una metrica. Mide feature engineering, experiment tracking, model registry, model/feature serving, MLOps/CI-CD con resources-as-code y drift monitoring en un unico proyecto productivo.",
+    "requirements": [
+      "Workspace Databricks con Unity Catalog; clonar el repo, cd mlops, instalar deps con uv sync --extra dev (Python 3.12) y configurar project_config.yml (catalogos mlops_dev/acc/prd, schema hotel_booking, features num/cat y target average_price)",
+      "Cap 2 - Preprocesamiento: ejecutar chapter2_preprocess_data.py para limpiar booking.csv y materializar train/test como tablas Delta en Unity Catalog (data_loader.py + data_processor.py)",
+      "Cap 3 - Tracking y registro: con chapter3_*.py correr el experiment tracking demo, entrenar/fine-tunear el LightGBMModel (Pipeline sklearn con ColumnTransformer + LGBMRegressor, params learning_rate/n_estimators/max_depth), loggear con mlflow.infer_signature y registrar el modelo en Unity Catalog; evaluar metricas",
+      "Cap 4 - Serving: desplegar Model Serving (chapter4_1) y montar el A/B testing demo (chapter4_1a); crear Feature Serving (chapter4_2) y consumir el modelo con feature lookup online (chapter4_3); autenticar las llamadas al endpoint con un service principal (chapter4_4)",
+      "Cap 5 - CI/CD: editar resources/ml_pipeline.yml y databricks.yml, validar y desplegar el bundle (databricks bundle deploy) por entorno para crear el Lakeflow Job preprocess -> train+register -> deploy",
+      "Cap 6 - Monitoreo: habilitar Lakehouse Monitoring (chapter6_2.enable_monitor.py), refrescar la tabla de monitoreo via resources/ml_monitoring.yml y configurar el SQL Alert (resources/alert.yml) sobre una metrica de calidad/drift; chapter6_1.call_endpoint.py para generar trafico",
+      "Correr la suite pytest (tests/) y opcionalmente demo.py para ver el flujo de extremo a extremo"
+    ],
+    "diagram": "flowchart LR\n  CSV[booking.csv] --> PRE[Cap2 Preprocess]\n  PRE --> DELTA[(Delta tables en Unity Catalog)]\n  DELTA --> FE[Feature Store / Feature Engineering]\n  FE --> TRAIN[Cap3 Train LightGBM + sklearn Pipeline]\n  TRAIN -->|log + signature| MLF[(MLflow tracking)]\n  MLF --> REG[Cap3 Model Registry en Unity Catalog<br/>catalog.schema.model dev/acc/prd]\n  REG --> MS[Cap4 Model Serving + A/B testing]\n  FE --> FS[Cap4 Feature Serving online lookup]\n  FS --> MS\n  MS -->|SPN auth| CONS[Consumidores / endpoint]\n  subgraph CICD[Cap5 Asset Bundles -> Lakeflow Jobs]\n    PRE -.-> JOB1[preprocess]\n    TRAIN -.-> JOB2[train + register]\n    MS -.-> JOB3[deploy]\n  end\n  MS --> MON[Cap6 Lakehouse Monitoring]\n  MON --> DRIFT[(Tabla de monitoreo: data quality + drift)]\n  DRIFT --> ALERT[SQL Alert sobre metrica]\n  ALERT -.->|retrain trigger| TRAIN",
+    "has_statement": true,
+    "has_solution": true,
+    "solution_loc": "Solucion completa provista (repo oficial del libro). mlops/: src/hotel_booking/ (config.py pydantic, data/ data_loader+data_processor, models/ lightgbm_model.py + pyfunc_model_wrapper.py + serving.py, monitoring.py), notebooks numerados por capitulo chapter2..chapter6, resources/ (ml_pipeline.yml, ml_monitoring.yml, alert.yml) como Asset Bundles, databricks.yml, project_config.yml, data/booking.csv, demo.py y tests/. Mapeo capitulo->topico en el README.",
+    "self_validating": false,
+    "runnable": "databricks",
+    "est_minutes": 300,
+    "preview": "Proyecto MLOps end-to-end del libro O'Reilly 'MLOps with Databricks' (Maria Vechtomova): prediccion de precio de reserva de hotel con LightGBM cubriendo todo el ciclo - preprocesamiento a Delta/Unity Catalog, experiment tracking y registro de modelo en MLflow/UC, Model Serving + Feature Serving con A/B testing y auth por service principal, CI/CD con Asset Bundles que despliegan Lakeflow Jobs por entorno, y Lakehouse Monitoring de calidad/drift con SQL Alert. Codigo de produccion (uv, pydantic config, pytest) organizado capitulo por capitulo.",
+    "portfolio_value": "Muy alto para vacantes de ML Engineer / MLOps en Databricks: es el recorrido canonico de un practitioner senior - feature engineering, tracking, model registry en Unity Catalog, serving online (model + feature) con A/B y auth, resources-as-code con Asset Bundles y drift monitoring, todo en un solo proyecto productivo y proveniente de un libro O'Reilly de referencia. Pocas demos juniors cubren serving + monitoring + CI-CD reales como aqui.",
+    "notes": "Branch main. Repo oficial del libro O'Reilly 'MLOps with Databricks: Machine Learning End-to-End'. El repo contiene DOS proyectos self-contained: mlops/ (este item, caps 2-6) y llmops/ (item separado, caps 7-9). 'Declarative Automation Bundles' = Databricks Asset Bundles. Stack 100% Databricks-puro. Python 3.12 + uv. La docstring de LightGBMModel dice 'house price' por herencia de un ejemplo previo, pero el caso real es precio de hotel booking (target average_price). Incluye ademas ai_governance/ con un checklist EU AI Act (MLOps/LLMOps)."
+  },
+  {
+    "id": "mlops__oreilly-llmops-arxiv-agent",
+    "title": "LLMOps con Databricks (O'Reilly) - Agente arXiv-Curator End-to-End: Vector Search + Genie, MLflow GenAI (tracing/eval), Deploy y Monitoreo en Produccion",
+    "repo": "mvechtomova/oreilly-mlops-with-databricks",
+    "repo_local": "repos/oreilly-mlops-with-databricks",
+    "source_url": "https://github.com/mvechtomova/oreilly-mlops-with-databricks/tree/main/llmops",
+    "path": "llmops",
+    "type": "project",
+    "scope": "end-to-end",
+    "difficulty": "advanced",
+    "difficulty_source": "inferred",
+    "stack": [
+      "Databricks",
+      "Databricks Vector Search (index + RAG)",
+      "Databricks Genie (NL-to-SQL space)",
+      "Foundation Model APIs (databricks-gpt-oss-120b)",
+      "MLflow for GenAI (tracing + ResponsesAgent)",
+      "MLflow agent evaluation (LLM-as-judge / scorers)",
+      "Model Serving (agent endpoint)",
+      "Lakebase (Postgres serverless para memoria/estado)",
+      "MCP (Model Context Protocol tools)",
+      "Databricks Asset Bundles / Lakeflow Jobs",
+      "Lakeview dashboard (monitoreo)",
+      "Service Principals",
+      "openai SDK (client compatible)",
+      "uv + Python 3.12",
+      "pytest"
+    ],
+    "cloud": [
+      "Databricks-pure"
+    ],
+    "rubro": [
+      "GenAI/research-tooling",
+      "contenido/marketing"
+    ],
+    "evaluates": "Ciclo LLMOps completo de punta a punta en Databricks (capitulos 7-9 del libro O'Reilly) construyendo, evaluando, desplegando y monitoreando un agente GenAI: el arXiv-Curator, un asistente que busca papers de arXiv y redacta posts de LinkedIn sobre research de AI/ML. Cubre: (7) modelos fundacionales y context engineering - procesar documentos arXiv hacia un volumen de Unity Catalog, construir un indice de Databricks Vector Search para RAG y consultar un espacio Genie (NL-to-SQL) para contexto adicional, ademas de Lakebase para memoria; (8) MLflow para GenAI - instrumentar el agente con tracing, testearlo y correr agent evaluation (scorers / LLM-as-judge sobre eval_inputs), luego loggear/registrar el agente como ResponsesAgent pyfunc con sus recursos (Genie space, serving endpoint, SQL warehouse, vector index); (9) monitoreo y deployment - crear un service principal, desplegar el agente como endpoint de Model Serving, llamarlo, propagar trazas y montar monitoreo de produccion (costo + dashboard Lakeview). Mide GenAI/RAG, vector search, agent tooling (MCP/Genie), evaluacion de agentes con MLflow, deployment y observabilidad de LLMs en produccion.",
+    "requirements": [
+      "Workspace Databricks con Unity Catalog, Vector Search, un espacio Genie y un endpoint de Foundation Model (project_config.yml usa databricks-gpt-oss-120b, genie_space_id, warehouse_id, volume arxiv_papers); cd llmops, uv sync --extra dev",
+      "Cap 7 - Foundation models y context: chapter7_1.arxiv_process_docs.py para ingerir/procesar papers de arXiv a un volumen UC (data_processor.py); chapter7_2.vector_sarch.py para construir el indice de Vector Search (vector_search.py); chapter7_3.genie.py para consultar el espacio Genie; chapter7_4.lakebase.py para la memoria en Lakebase; chapter7_0 para probar respuestas del modelo",
+      "Cap 8 - MLflow GenAI: chapter8_1.mlflow_tracing.py para instrumentar trazas; chapter8_2.test_agent.py para probar el agente (agent.py = ResponsesAgent con tools de Vector Search/Genie); chapter8_3 demo de agent evaluation; chapter8_4.evaluate_log_register_agent.py para evaluar (eval_inputs.txt), loggear y registrar el agente con sus DatabricksResources",
+      "Cap 9 - Deploy y monitoreo: chapter9_1.create_spn.py (service principal); chapter9_2.deploy_agent.py (Model Serving endpoint); chapter9_3.call_agent.py (invocar); chapter9_4.propagate_traces.py; chapter9_5.cost_monitoring.py para monitoreo de costo",
+      "Orquestacion via Asset Bundles: desplegar resources/ (process_data.yml, vector_sarch_job.yml, register_deploy_agent.yml, production_monitoring.yml) como Lakeflow Jobs y el dashboard Lakeview (agent_monitoring_dashboard); deployment_notebooks/ contiene los notebooks que ejecutan los jobs",
+      "Correr pytest (tests/: test_config, test_exceptions, test_mcp, test_vector_search) para validar los modulos del paquete arxiv_curator"
+    ],
+    "diagram": "flowchart LR\n  ARXIV[arXiv papers] --> PROC[Cap7 process_docs -> Volume UC]\n  PROC --> VS[(Vector Search index)]\n  GENIE[(Genie space NL-to-SQL)] --> AGENT\n  VS -->|RAG retrieval| AGENT[arXiv-Curator Agent<br/>ResponsesAgent + tools/MCP]\n  LB[(Lakebase memoria)] --> AGENT\n  FM[Foundation Model gpt-oss-120b] --> AGENT\n  AGENT --> POST[LinkedIn post sobre research]\n  AGENT -->|tracing| TRACE[Cap8 MLflow tracing]\n  TRACE --> EVAL[Cap8 Agent evaluation<br/>scorers / LLM-judge]\n  EVAL --> REG[Cap8 log + register agent + resources]\n  REG --> SPN[Cap9 create service principal]\n  SPN --> SERVE[Cap9 deploy Model Serving endpoint]\n  SERVE --> CALL[call_agent]\n  CALL --> MON[Cap9 production monitoring + costo]\n  MON --> DASH[Lakeview dashboard]",
+    "has_statement": true,
+    "has_solution": true,
+    "solution_loc": "Solucion completa provista (repo oficial del libro). llmops/: src/arxiv_curator/ (agent.py ResponsesAgent, vector_search.py, data_processor.py, evaluation.py, mcp.py, memory.py, config.py, utils/), notebooks chapter7_*..chapter9_* por capitulo, resources/ (process_data.yml, vector_sarch_job.yml, register_deploy_agent.yml, production_monitoring.yml, dashboard/ Lakeview, deployment_notebooks/), databricks.yml, project_config.yml (system_prompt + genie/llm/warehouse por entorno), eval_inputs.txt y tests/.",
+    "self_validating": false,
+    "runnable": "databricks",
+    "est_minutes": 300,
+    "preview": "Parte LLMOps del libro O'Reilly 'MLOps with Databricks' (caps 7-9): el agente arXiv-Curator que busca papers y redacta posts de LinkedIn. Recorrido GenAI completo - RAG con Databricks Vector Search + Genie (NL-to-SQL) + Lakebase de memoria sobre Foundation Models, instrumentacion con MLflow tracing, agent evaluation (LLM-as-judge), registro como ResponsesAgent, deploy a Model Serving con service principal y monitoreo de produccion con dashboard Lakeview y control de costo. Orquestado con Asset Bundles.",
+    "portfolio_value": "Muy alto para vacantes de AI/GenAI Engineer en Databricks (Mosaic AI): demuestra el stack LLMOps moderno de extremo a extremo - Vector Search + Genie, agente con MLflow tracing y evaluation, deploy a Model Serving y observabilidad/costo en produccion - patrones que las empresas piden hoy y que casi ningun portfolio junior muestra completos. Procedencia de libro O'Reilly suma credibilidad.",
+    "notes": "Branch main. Segundo de los dos proyectos self-contained del repo oficial (este es llmops/, caps 7-9; el otro es mlops/, caps 2-6, item separado). Parte sustancial: agente productivo + RAG + eval + deploy + monitoreo, no un toy. Stack Databricks-puro / Mosaic AI. Foundation model por defecto databricks-gpt-oss-120b (no Anthropic). Hay un typo en el nombre de recurso vector_sarch_job.yml/chapter7_2.vector_sarch.py (asi figura en el repo). Incluye soporte MCP (mcp.py) y memoria en Lakebase. Python 3.12 + uv."
+  },
+  {
+    "id": "mlops__databricks-mlops-stacks-template",
+    "title": "Databricks MLOps Stacks - Template oficial (Asset Bundle) para scaffolding de proyectos ML productivos: ML code + resources-as-code + CI/CD dev/staging/prod",
+    "repo": "databricks/mlops-stacks",
+    "repo_local": "repos/mlops-stacks",
+    "source_url": "https://github.com/databricks/mlops-stacks/blob/main/README.md",
+    "path": ".",
+    "type": "project",
+    "scope": "end-to-end",
+    "difficulty": "advanced",
+    "difficulty_source": "inferred",
+    "stack": [
+      "Databricks Asset Bundle Templates",
+      "Databricks CLI (databricks bundle init/deploy)",
+      "MLflow (training + batch inference)",
+      "Unity Catalog (Models in UC opcional, 3-level namespace)",
+      "Databricks Feature Store / Feature Engineering (opcional)",
+      "MLflow Recipes (opcional)",
+      "Databricks Jobs (model-workflow + batch-inference)",
+      "Lakehouse Monitoring (monitoring component)",
+      "Model validation component",
+      "CI/CD: GitHub Actions / Azure DevOps / GitLab",
+      "cookiecutter + Go text/template (databricks_template_schema.json)",
+      "pytest (unit + integration tests)",
+      "Multi-workspace dev/staging/prod"
+    ],
+    "cloud": [
+      "Databricks-pure"
+    ],
+    "rubro": [
+      "generico/plantilla"
+    ],
+    "evaluates": "Template oficial de Databricks (Databricks Asset Bundle template, en public preview) que scaffolda un proyecto de ML productivo siguiendo best-practices out-of-the-box. No resuelve un problema de negocio: genera la estructura. Tres componentes modulares: (1) ML Code - estructura de proyecto ML de ejemplo con modulos Python unit-tested y notebooks para training y batch inference (+ feature_engineering, monitoring, validation opcionales); (2) ML Resources as Code - jobs de la pipeline (model-workflow y batch-inference) definidos via Databricks CLI bundles para gobernar/auditar/desplegar cambios por pull request en vez de cambios ad-hoc por UI; (3) CI/CD - workflows de GitHub Actions, Azure DevOps o GitLab que testean y despliegan codigo y recursos ML a traves de los entornos dev, staging y prod (con workspaces separados recomendados). Permite registrar modelos en Unity Catalog (namespace catalog.schema.model por entorno) e incluir opcionalmente Feature Store y MLflow Recipes. Evalua el dominio del patron MLOps de plataforma: resources-as-code, promocion dev->staging->prod, CI/CD multi-workspace y testing automatizado de pipelines ML.",
+    "requirements": [
+      "Tener Databricks CLI >= v0.236.0 y Python 3.8+; el template se instancia con databricks bundle init mlops-stacks (no se clona/ejecuta el repo directamente: es scaffolding)",
+      "Elegir input_setup_cicd_and_project (CICD_and_Project / Project_Only / CICD_Only), input_cloud (AWS/Azure/GCP), input_cicd_platform (GitHub Actions / GHES / Azure DevOps / GitLab) y los hosts de los workspaces de staging y prod",
+      "Definir input_project_name, input_root_dir, branches default/release, grupos de lectura, y opciones: input_include_models_in_unity_catalog (+ schema_name y grupo de EXECUTE), input_include_feature_store, input_include_mlflow_recipes",
+      "Tras instanciar, seguir el README.md generado: editar el ML code (training/ y deployment/batch_inference/), ajustar los resources/*.yml.tmpl (model-workflow, batch-inference, monitoring) y validar/desplegar con databricks bundle deploy por entorno",
+      "Configurar el pipeline CI/CD generado (.github/.azure/.gitlab) para correr unit + integration tests en staging al abrir PR y promover a prod al cortar la release branch; ver Pipeline.md para los diagramas del pipeline por defecto",
+      "Para el repo en si: explorar template/ (estructura cookiecutter con placeholders Go), cookiecutter.json, databricks_template_schema.json, library/, hooks/ y tests/ para entender/personalizar el stack (stack-customization.md)"
+    ],
+    "diagram": "flowchart LR\n  INIT[databricks bundle init mlops-stacks] --> SCAF[Proyecto instanciado]\n  subgraph PROJ[Proyecto generado]\n    CODE[ML Code: training + batch_inference<br/>feature_engineering / monitoring / validation]\n    RES[ML Resources as Code: *.yml.tmpl<br/>model-workflow + batch-inference jobs]\n    CICD[CI/CD: GitHub Actions / Azure DevOps / GitLab]\n  end\n  SCAF --> PROJ\n  DEV[Dev workspace<br/>data scientist itera + PR] -->|PR dispara| STG[Staging workspace<br/>unit + integration tests]\n  STG -->|merge a main| STGDEPLOY[Jobs staging actualizan]\n  STGDEPLOY -->|cut release branch| PROD[Prod workspace<br/>training + batch inference jobs]\n  RES -.gobierna.-> DEV\n  RES -.gobierna.-> STG\n  RES -.gobierna.-> PROD\n  PROD --> UC[(Models en Unity Catalog<br/>catalog.schema.model por entorno)]",
+    "has_statement": true,
+    "has_solution": true,
+    "solution_loc": "Template completo provisto (repo oficial Databricks). template/ con la estructura cookiecutter (placeholders Go {{.input_root_dir}}, {{template `project_name_alphanumeric_underscore` .}}) que contiene el proyecto ML (training, deployment/batch_inference, feature_engineering, monitoring, validation, resources/*.yml.tmpl, tests/) y los workflows de CI/CD (.github, .azure, .gitlab). Configuracion del template en cookiecutter.json, databricks_template_schema.json, library/, hooks/. Docs: Pipeline.md (diagramas del pipeline por defecto), stack-customization.md, tests/.",
+    "self_validating": false,
+    "runnable": "databricks",
+    "est_minutes": 150,
+    "preview": "Template oficial de Databricks (Asset Bundle, public preview) para arrancar proyectos ML productivos con best-practices out-of-the-box. Tres componentes modulares: ML code (training + batch inference, unit-tested), ML resources-as-code (jobs via bundles, gobernados por PR) y CI/CD (GitHub Actions / Azure DevOps / GitLab) que promueve cambios a traves de workspaces dev -> staging -> prod. Se instancia con 'databricks bundle init mlops-stacks'. Opcional: Models in Unity Catalog, Feature Store, MLflow Recipes.",
+    "portfolio_value": "Alto para vacantes de ML Platform / MLOps Engineer: es el patron de referencia de Databricks para industrializar ML - resources-as-code, promocion dev/staging/prod multi-workspace y CI/CD automatizado. Dominarlo demuestra que sabes montar la plataforma sobre la que corren los modelos (no solo entrenar uno). Util como base real para scaffolding de proyectos en una empresa.",
+    "notes": "Branch main. SCAFFOLDING / TEMPLATE, no un problema de ML resuelto: genera la estructura de un proyecto, no entrena un modelo end-to-end por si mismo (el 'modelo' de ejemplo es un placeholder). En public preview. Se consume via 'databricks bundle init mlops-stacks' (esta empaquetado en el Databricks CLI), no clonando y ejecutando el repo. Multi-cloud por configuracion (AWS/Azure/GCP) pero el stack es Databricks-puro. Soporta GitHub Actions, GHES, Azure DevOps y GitLab. Requiere Databricks CLI >= v0.236.0."
+  }
+]

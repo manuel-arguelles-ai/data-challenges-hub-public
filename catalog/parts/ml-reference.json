@@ -1,0 +1,348 @@
+[
+  {
+    "id": "mlref__databricks-ml-associate-cert",
+    "title": "Databricks Certified Machine Learning Associate – Exam Blueprint",
+    "repo": "— databricks.com/cert",
+    "repo_local": "",
+    "source_url": "https://www.databricks.com/learn/certification/machine-learning-associate",
+    "path": "https://www.databricks.com/learn/certification/machine-learning-associate",
+    "type": "qa-reference",
+    "scope": "micro",
+    "difficulty": "beginner",
+    "difficulty_source": "declared+verified",
+    "stack": [
+      "Databricks ML Runtime",
+      "AutoML",
+      "MLflow",
+      "Feature Store",
+      "Spark ML",
+      "Unity Catalog",
+      "Model Serving"
+    ],
+    "cloud": [
+      "Databricks-pure"
+    ],
+    "rubro": [
+      "genérico/fundamentos"
+    ],
+    "evaluates": [
+      "Databricks Machine Learning platform (38%)",
+      "ML Workflows (19%) — feature engineering, EDA",
+      "Model Development (31%) — AutoML, training, hyperparameter tuning, MLflow tracking",
+      "Model Deployment (12%) — batch/streaming/real-time serving",
+      "AutoML",
+      "MLflow experiment tracking",
+      "feature engineering"
+    ],
+    "requirements": [
+      "Ningún prerrequisito formal (nivel Associate)",
+      "Manejo básico de Python y scikit-learn / Spark ML",
+      "Familiaridad con AutoML, MLflow y Feature Store en Databricks"
+    ],
+    "diagram": null,
+    "has_statement": true,
+    "has_solution": false,
+    "solution_loc": "",
+    "self_validating": false,
+    "runnable": "local",
+    "est_minutes": 90,
+    "preview": "Blueprint oficial de la certificación Databricks ML Associate: usar como proxy de skills de nivel inicial en ML sobre Databricks (AutoML, MLflow tracking, feature engineering, training/tuning y despliegue básico). Pesos por dominio: Databricks ML 38%, ML Workflows 19%, Model Development 31%, Deployment 12%.",
+    "portfolio_value": "Cubre los fundamentos de ML Engineer en Databricks (AutoML + MLflow + Feature Store + serving) que todo perfil junior/mid debe demostrar; la cert es señal reconocida en el mercado.",
+    "notes": "Cert de entrada. Ideal para mapear cobertura de skills ML básicas. evaluates ponderado según pesos oficiales del examen."
+  },
+  {
+    "id": "mlref__databricks-ml-professional-cert",
+    "title": "Databricks Certified Machine Learning Professional – Exam Blueprint",
+    "repo": "— databricks.com/cert",
+    "repo_local": "",
+    "source_url": "https://www.databricks.com/learn/certification/machine-learning-professional",
+    "path": "https://www.databricks.com/learn/certification/machine-learning-professional",
+    "type": "qa-reference",
+    "scope": "micro",
+    "difficulty": "advanced",
+    "difficulty_source": "declared+verified",
+    "stack": [
+      "MLflow Model Registry",
+      "Feature Store",
+      "Lakehouse Monitoring",
+      "Model Serving",
+      "Databricks Jobs",
+      "Webhooks",
+      "Unity Catalog"
+    ],
+    "cloud": [
+      "Databricks-pure"
+    ],
+    "rubro": [
+      "genérico/fundamentos"
+    ],
+    "evaluates": [
+      "Model Development (44%) — MLflow avanzado, Feature Store pipelines, signatures, flavors",
+      "ML Operations / MLOps (44%) — model registry, transiciones, webhooks, Lakehouse Monitoring/drift, retraining automático, CI/CD",
+      "Model Deployment (12%) — batch, streaming, custom model serving, real-time",
+      "MLflow Model Registry",
+      "Lakehouse Monitoring (drift detection)",
+      "retraining pipelines",
+      "MLOps",
+      "model serving"
+    ],
+    "requirements": [
+      "Experiencia sólida en ML en producción sobre Databricks",
+      "Dominio avanzado de MLflow (tracking, registry, custom pyfunc models)",
+      "Manejo de Feature Store, Lakehouse Monitoring y pipelines de retraining/CI-CD"
+    ],
+    "diagram": null,
+    "has_statement": true,
+    "has_solution": false,
+    "solution_loc": "",
+    "self_validating": false,
+    "runnable": "local",
+    "est_minutes": 120,
+    "preview": "Blueprint oficial de la cert Databricks ML Professional, enfocada en producción/MLOps. Proxy de skills avanzadas: MLflow avanzado, model registry, Feature Store pipelines, Lakehouse Monitoring/drift, retraining automático y custom model serving. Pesos: Model Development 44%, ML Ops 44%, Deployment 12%.",
+    "portfolio_value": "Señal de madurez MLOps en Databricks: el dominio ML Ops 44% + Model Development 44% es exactamente lo que distingue a un ML Engineer senior/productivo de uno junior.",
+    "notes": "Cert avanzada (producción). El eje real es MLOps: registry, monitoring/drift y retraining automático. evaluates ponderado según pesos oficiales."
+  },
+  {
+    "id": "mlref__databricks-genai-engineer-associate-cert",
+    "title": "Databricks Certified Generative AI Engineer Associate – Exam Blueprint",
+    "repo": "— databricks.com/cert",
+    "repo_local": "",
+    "source_url": "https://www.databricks.com/learn/certification/genai-engineer-associate",
+    "path": "https://www.databricks.com/learn/certification/genai-engineer-associate",
+    "type": "qa-reference",
+    "scope": "micro",
+    "difficulty": "intermediate",
+    "difficulty_source": "declared+verified",
+    "stack": [
+      "Mosaic AI",
+      "Vector Search",
+      "RAG",
+      "Foundation Model APIs",
+      "MLflow",
+      "Model Serving",
+      "AI Gateway",
+      "Unity Catalog"
+    ],
+    "cloud": [
+      "Databricks-pure"
+    ],
+    "rubro": [
+      "genérico/fundamentos"
+    ],
+    "evaluates": [
+      "Design Applications (14%) — diseño de apps GenAI/RAG",
+      "Data Preparation (14%) — chunking, embeddings, ingest",
+      "Application Development (30%) — RAG, vector search, LLM app development, prompts, chains/agents",
+      "Deployment (22%) — model serving, endpoints, AI Gateway",
+      "Governance (8%) — guardrails, PII, Unity Catalog",
+      "Evaluation & Monitoring (12%) — LLM evaluation, MLflow eval, métricas",
+      "RAG",
+      "vector search",
+      "LLM app development"
+    ],
+    "requirements": [
+      "Conocimiento intermedio de LLMs y patrones RAG",
+      "Manejo de Mosaic AI Vector Search, embeddings y Foundation Model APIs",
+      "Familiaridad con model serving, evaluación de LLMs y gobernanza en Databricks"
+    ],
+    "diagram": null,
+    "has_statement": true,
+    "has_solution": false,
+    "solution_loc": "",
+    "self_validating": false,
+    "runnable": "local",
+    "est_minutes": 90,
+    "preview": "Blueprint oficial de la cert Databricks GenAI Engineer Associate: proxy de skills GenAI sobre Databricks (RAG, vector search, desarrollo y despliegue de apps LLM, evaluación). Pesos: Design 14%, Data Prep 14%, App Dev 30%, Deploy 22%, Governance 8%, Eval&Monitoring 12%.",
+    "portfolio_value": "Demuestra capacidad de construir y desplegar aplicaciones GenAI/RAG end-to-end en Databricks Mosaic AI, una de las áreas de mayor demanda del mercado 2025-2026.",
+    "notes": "Cert intermedia GenAI. El núcleo es App Development 30% + Deployment 22% (RAG + vector search + serving). evaluates ponderado según pesos oficiales."
+  },
+  {
+    "id": "mlref__alirezadir-machine-learning-interviews",
+    "title": "alirezadir/Machine-Learning-Interviews – ML system design & interview prep",
+    "repo": "alirezadir/Machine-Learning-Interviews",
+    "repo_local": "repos/Machine-Learning-Interviews",
+    "source_url": "https://github.com/alirezadir/Machine-Learning-Interviews",
+    "path": "repos/Machine-Learning-Interviews/README.md",
+    "type": "qa-reference",
+    "scope": "micro",
+    "difficulty": "advanced",
+    "difficulty_source": "inferred",
+    "stack": [
+      "ML fundamentals",
+      "ML coding",
+      "ML system design",
+      "LLMs / GenAI",
+      "RAG",
+      "Python"
+    ],
+    "cloud": [
+      "agnóstico"
+    ],
+    "rubro": [
+      "genérico/fundamentos"
+    ],
+    "evaluates": [
+      "ML system design",
+      "ML fundamentals / breadth (LLMs, multimodal AI)",
+      "ML coding (algoritmos ML desde cero)",
+      "GenAI / LLM system design (RAG, agents, guardrails, eval)",
+      "feature engineering",
+      "model deployment / production ML"
+    ],
+    "requirements": [
+      "Base sólida de ML clásico y deep learning",
+      "Python para implementar algoritmos ML desde cero",
+      "No requiere Databricks (material agnóstico)"
+    ],
+    "diagram": null,
+    "has_statement": true,
+    "has_solution": true,
+    "solution_loc": "repos/Machine-Learning-Interviews/src/",
+    "self_validating": false,
+    "runnable": "local",
+    "est_minutes": 180,
+    "preview": "Guía completa de preparación para entrevistas de ML Engineer en FAANG (autor con ofertas de Meta/Google/Amazon/Apple/Roku). Capítulos: coding, ML coding, ML fundamentals/breadth, ML system design y behavioral. Actualizado 2026 con GenAI/LLM (KV cache, GQA, RoPE, MoE, SFT/DPO/GRPO, RAG/agents/guardrails/eval).",
+    "portfolio_value": "Referencia canónica de ML system design e interview prep; refuerza el músculo de diseño de sistemas ML/GenAI que complementa las certs prácticas de Databricks.",
+    "notes": "Repo clonado, branch main (verificado con git). NO es Databricks-específico — material agnóstico de cloud, pero los patrones de ML system design y GenAI aplican directamente al ecosistema Mosaic AI/Spark ML. Las soluciones/notas viven en src/ (capítulos markdown)."
+  },
+  {
+    "id": "mlref__khangich-machine-learning-interview",
+    "title": "khangich/machine-learning-interview – Minimum Viable Study Plan for ML interviews",
+    "repo": "khangich/machine-learning-interview",
+    "repo_local": "repos/machine-learning-interview",
+    "source_url": "https://github.com/khangich/machine-learning-interview",
+    "path": "repos/machine-learning-interview/README.md",
+    "type": "qa-reference",
+    "scope": "micro",
+    "difficulty": "advanced",
+    "difficulty_source": "inferred",
+    "stack": [
+      "ML system design",
+      "Applied ML",
+      "ML fundamentals",
+      "SQL / LeetCode",
+      "Python"
+    ],
+    "cloud": [
+      "agnóstico"
+    ],
+    "rubro": [
+      "genérico/fundamentos"
+    ],
+    "evaluates": [
+      "ML system design (YouTube rec, feed ranking, ad click prediction, delivery ETA, Airbnb search)",
+      "applied ML use cases de top companies",
+      "ML fundamentals / breadth (quiz)",
+      "feature engineering",
+      "model deployment / production ML"
+    ],
+    "requirements": [
+      "Base de ML clásico, métricas y modelado",
+      "Python y SQL para coding rounds",
+      "No requiere Databricks (material agnóstico)"
+    ],
+    "diagram": null,
+    "has_statement": true,
+    "has_solution": true,
+    "solution_loc": "repos/machine-learning-interview/design.md",
+    "self_validating": false,
+    "runnable": "local",
+    "est_minutes": 180,
+    "preview": "Plan de estudio mínimo viable para entrevistas de ML (autor con ofertas de Google/LinkedIn/Coupang/Snap/StitchFix). Cubre ML design (YouTube rec, feed ranking, ad click, delivery ETA, Airbnb search), applied ML de top companies, fundamentals, quiz y leetcode. Incluye design.md, appliedml.md, questions.md, quiz.md.",
+    "portfolio_value": "Catálogo de casos reales de ML system design de big tech; útil para razonar arquitecturas de recomendación/ranking/predicción que luego se aterrizan en Spark ML / Mosaic AI.",
+    "notes": "Repo clonado, branch master (verificado con git). Agnóstico de cloud, no Databricks-específico. El contenido de diseño vive en design.md y appliedml.md; quiz/questions para fundamentals."
+  },
+  {
+    "id": "mlref__hellointerview-ml-system-design",
+    "title": "HelloInterview – ML System Design (In a Hurry)",
+    "repo": "— hellointerview.com",
+    "repo_local": "",
+    "source_url": "https://www.hellointerview.com/learn/ml-system-design/in-a-hurry/introduction",
+    "path": "https://www.hellointerview.com/learn/ml-system-design/in-a-hurry/introduction",
+    "type": "qa-reference",
+    "scope": "micro",
+    "difficulty": "intermediate",
+    "difficulty_source": "inferred",
+    "stack": [
+      "ML system design",
+      "Feature engineering",
+      "Model serving",
+      "ML pipelines"
+    ],
+    "cloud": [
+      "agnóstico"
+    ],
+    "rubro": [
+      "genérico/fundamentos"
+    ],
+    "evaluates": [
+      "ML system design (framework estructurado de entrevista)",
+      "feature engineering",
+      "model deployment / serving",
+      "training & evaluation pipelines",
+      "scaling & monitoring de sistemas ML"
+    ],
+    "requirements": [
+      "Conocimiento intermedio de ML aplicado y arquitecturas de datos",
+      "Familiaridad con pipelines de training/serving",
+      "No requiere Databricks (material agnóstico)"
+    ],
+    "diagram": null,
+    "has_statement": true,
+    "has_solution": true,
+    "solution_loc": "https://www.hellointerview.com/learn/ml-system-design",
+    "self_validating": false,
+    "runnable": "local",
+    "est_minutes": 120,
+    "preview": "Curso 'In a Hurry' de HelloInterview para ML System Design: framework estructurado para abordar entrevistas de diseño de sistemas ML (definir requisitos, data, features, modelo, serving, scaling, monitoring). Recurso web con walkthroughs y casos guiados.",
+    "portfolio_value": "Framework reproducible de ML system design; entrena la estructura de respuesta que sirve tanto para entrevistas como para diseñar pipelines reales en Databricks.",
+    "notes": "Recurso web (no clonado). Agnóstico de cloud. Complementa a alirezadir/khangich con un framework más prescriptivo y guiado."
+  },
+  {
+    "id": "mlref__nvidia-kaggle-grandmaster-feature-engineering",
+    "title": "NVIDIA – Grandmaster Pro Tip: Winning 1st Place with Feature Engineering (cuDF, Chris Deotte)",
+    "repo": "— developer.nvidia.com/blog",
+    "repo_local": "",
+    "source_url": "https://developer.nvidia.com/blog/grandmaster-pro-tip-winning-first-place-in-kaggle-competition-with-feature-engineering-using-nvidia-cudf-pandas/",
+    "path": "https://developer.nvidia.com/blog/grandmaster-pro-tip-winning-first-place-in-kaggle-competition-with-feature-engineering-using-nvidia-cudf-pandas/",
+    "type": "qa-reference",
+    "scope": "micro",
+    "difficulty": "intermediate",
+    "difficulty_source": "inferred",
+    "stack": [
+      "Feature engineering",
+      "pandas / cuDF",
+      "Tabular ML",
+      "GBDT (XGBoost/LightGBM)"
+    ],
+    "cloud": [
+      "agnóstico"
+    ],
+    "rubro": [
+      "genérico/fundamentos"
+    ],
+    "evaluates": [
+      "feature engineering (tabular)",
+      "groupby aggregations",
+      "binning / quantiles",
+      "NaN encoding",
+      "categorical combinations / combos",
+      "feature selection para GBDT"
+    ],
+    "requirements": [
+      "Manejo de pandas (o cuDF) y modelos GBDT",
+      "Datos tabulares estructurados",
+      "No requiere Databricks — técnicas portables a Spark ML / pandas API on Spark"
+    ],
+    "diagram": null,
+    "has_statement": true,
+    "has_solution": true,
+    "solution_loc": "https://developer.nvidia.com/blog/grandmaster-pro-tip-winning-first-place-in-kaggle-competition-with-feature-engineering-using-nvidia-cudf-pandas/",
+    "self_validating": false,
+    "runnable": "local",
+    "est_minutes": 60,
+    "preview": "Blog de NVIDIA con los pro tips de Chris Deotte (Kaggle Grandmaster) para ganar competencias tabulares con feature engineering acelerado por cuDF/pandas: catálogo de técnicas — groupby aggregations, binning, quantiles, NaN encoding, combinaciones de categóricas — explicadas con ejemplos.",
+    "portfolio_value": "Catálogo práctico y de alto rendimiento de feature engineering tabular; las técnicas se trasladan directo a Spark ML / pandas API on Spark para mejorar modelos en Databricks.",
+    "notes": "Recurso web (no clonado). Agnóstico — aunque usa cuDF/GPU, las recetas de FE son portables a Spark. Refuerza el dominio 'ML Workflows / feature engineering' de la cert ML Associate."
+  }
+]

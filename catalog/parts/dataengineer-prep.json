@@ -1,0 +1,724 @@
+[
+ {
+  "id": "deprep__interview__phonepe",
+  "title": "PhonePe — Data Engineer Interview (SQL · Spark · Pipeline Design)",
+  "repo": "Noman654/dataengineer_prep",
+  "repo_local": "repos/dataengineer_prep",
+  "source_url": "https://github.com/Noman654/dataengineer_prep/blob/main/company_interviews/phonepe/online.md",
+  "path": "company_interviews/phonepe/online.md",
+  "type": "interview-questions",
+  "scope": "micro",
+  "difficulty": "intermediate",
+  "difficulty_source": "inferred",
+  "stack": [
+   "SQL",
+   "PySpark",
+   "Spark internals",
+   "Kafka",
+   "System Design"
+  ],
+  "cloud": [
+   "agnóstico"
+  ],
+  "rubro": [
+   "fintech",
+   "pagos digitales"
+  ],
+  "evaluates": [
+   "window functions (running total, moving average, gap-and-island, LAG/LEAD)",
+   "median sin MEDIAN(), DENSE_RANK, top-N por grupo",
+   "Spark internals (DAG, lazy eval, shuffle, skew, Catalyst, OOM)",
+   "ETL incremental idempotente + exactly-once Kafka→Spark",
+   "system design de analítica transaccional + reconciliación"
+  ],
+  "requirements": [
+   "resolver el set de SQL de window functions sobre tabla de transacciones",
+   "explicar internals de Spark con el 'por qué'",
+   "diseñar pipeline incremental con tracking, late-data e idempotencia"
+  ],
+  "diagram": null,
+  "has_statement": true,
+  "has_solution": true,
+  "solution_loc": "company_interviews/phonepe/online.md (queries SQL de ejemplo + tips por ronda inline)",
+  "self_validating": false,
+  "runnable": "local",
+  "est_minutes": 90,
+  "preview": "Banco de preguntas reales de entrevista DE en PhonePe (fintech): 4 rondas, SQL de window functions dominante, internals de Spark e idempotencia/reconciliación financiera.",
+  "portfolio_value": "Prep estructurado para roles DE en fintech; demuestra fluidez en SQL analítico financiero y diseño de pipelines idempotentes.",
+  "notes": "Trae snippet SQL de moving average y orientación por ronda, no un solucionario completo. SQL es el foco más fuerte."
+ },
+ {
+  "id": "deprep__interview__swiggy",
+  "title": "Swiggy — Data Engineer Interview (SQL · Modeling · Streaming)",
+  "repo": "Noman654/dataengineer_prep",
+  "repo_local": "repos/dataengineer_prep",
+  "source_url": "https://github.com/Noman654/dataengineer_prep/blob/main/company_interviews/swiggy/online.md",
+  "path": "company_interviews/swiggy/online.md",
+  "type": "interview-questions",
+  "scope": "micro",
+  "difficulty": "intermediate",
+  "difficulty_source": "inferred",
+  "stack": [
+   "SQL",
+   "PySpark",
+   "Delta Lake",
+   "Kafka",
+   "Spark Streaming",
+   "Data Modeling"
+  ],
+  "cloud": [
+   "agnóstico"
+  ],
+  "rubro": [
+   "food-delivery",
+   "logística de última milla"
+  ],
+  "evaluates": [
+   "SQL de delivery (tiempos PICKUP→DELIVERED, rolling avg, lapsed users, gap-and-island)",
+   "modelado del order management + SCD para menús",
+   "Spark skew sobre restaurant_id, DAU, particionado, Delta vs Parquet",
+   "system design de tracking real-time (GPS), fraude y warehouse de GMV"
+  ],
+  "requirements": [
+   "resolver SQL sobre orders/delivery_events",
+   "diseñar esquema OLTP/OLAP del marketplace y manejar SCD",
+   "diseñar pipeline de tracking en tiempo real con late-arriving updates"
+  ],
+  "diagram": null,
+  "has_statement": true,
+  "has_solution": false,
+  "solution_loc": null,
+  "self_validating": false,
+  "runnable": "local",
+  "est_minutes": 90,
+  "preview": "Banco de preguntas de entrevista DE en Swiggy (food-delivery): SQL de logística de entregas, modelado del marketplace y system design de tracking real-time por GPS.",
+  "portfolio_value": "Prep para DE en marketplaces de delivery; enfatiza escenarios de streaming/ETA y modelado de operaciones logísticas.",
+  "notes": "Solo enunciados + tips, sin soluciones (data pública limitada, el propio archivo lo marca como parcial)."
+ },
+ {
+  "id": "deprep__interview__flipkart",
+  "title": "Flipkart — Data Engineer Interview (Machine Coding Spark · Modeling · System Design)",
+  "repo": "Noman654/dataengineer_prep",
+  "repo_local": "repos/dataengineer_prep",
+  "source_url": "https://github.com/Noman654/dataengineer_prep/blob/main/company_interviews/flipkart/online.md",
+  "path": "company_interviews/flipkart/online.md",
+  "type": "interview-questions",
+  "scope": "micro",
+  "difficulty": "advanced",
+  "difficulty_source": "inferred",
+  "stack": [
+   "PySpark",
+   "SQL",
+   "Delta Lake",
+   "Kafka",
+   "CDC",
+   "Airflow",
+   "Data Modeling"
+  ],
+  "cloud": [
+   "agnóstico"
+  ],
+  "rubro": [
+   "e-commerce",
+   "retail"
+  ],
+  "evaluates": [
+   "machine coding en Spark en vivo (flatten JSON anidado, sesiones, dedupe a escala, broadcast join)",
+   "debugging de OOM/skew y tuning explicado",
+   "modelado star schema + SCD2 + SQL avanzado (anti-join, MoM growth, consecutivos)",
+   "system design de Big Billion Days, CDC MySQL→Redshift y framework de data quality"
+  ],
+  "requirements": [
+   "escribir job Spark generalizado sobre dataset crudo en vivo",
+   "diseñar fact/dim con SCD2 y elegir normalización para OLAP",
+   "diseñar pipeline near-real-time con exactly-once y manejo de picos 10x"
+  ],
+  "diagram": null,
+  "has_statement": true,
+  "has_solution": false,
+  "solution_loc": null,
+  "self_validating": false,
+  "runnable": "local",
+  "est_minutes": 90,
+  "preview": "Banco de preguntas de entrevista DE en Flipkart (e-commerce): ronda signature de machine coding en Spark en vivo, modelado star/SCD2 y system design de surge (Big Billion Days).",
+  "portfolio_value": "Prep para DE senior en e-commerce de gran escala; cubre la difícil ronda de coding Spark en vivo y tuning de performance.",
+  "notes": "Solo enunciados + tips por ronda (qué evalúan, follow-ups y conceptos clave), sin código solución. Dificultad alta por la ronda de machine coding."
+ },
+ {
+  "id": "deprep__interview__jio",
+  "title": "Jio (Reliance) — Data Engineer Interview (DSA · Big Data · SQL)",
+  "repo": "Noman654/dataengineer_prep",
+  "repo_local": "repos/dataengineer_prep",
+  "source_url": "https://github.com/Noman654/dataengineer_prep/blob/main/company_interviews/jio/online.md",
+  "path": "company_interviews/jio/online.md",
+  "type": "interview-questions",
+  "scope": "micro",
+  "difficulty": "intermediate",
+  "difficulty_source": "inferred",
+  "stack": [
+   "DSA",
+   "PySpark",
+   "Hadoop/HDFS",
+   "SQL",
+   "Data Modeling",
+   "Spark Streaming"
+  ],
+  "cloud": [
+   "agnóstico"
+  ],
+  "rubro": [
+   "telco",
+   "telecomunicaciones"
+  ],
+  "evaluates": [
+   "DSA Easy-Medium (triplets, anagramas, stack con colas, trapping rain water)",
+   "conceptos de Spark (arquitectura, transformaciones vs acciones, cache vs persist, broadcast)",
+   "Hadoop/HDFS (NameNode, replicación, MapReduce vs Spark)",
+   "SQL conceptual (2do salario, RANK/DENSE_RANK/ROW_NUMBER, joins, duplicados) y modelado star vs snowflake"
+  ],
+  "requirements": [
+   "resolver DSA indicando complejidad temporal/espacial",
+   "explicar arquitectura y conceptos de Spark/Hadoop",
+   "diseñar pipeline para 100M+ usuarios y warehouse de billing telco"
+  ],
+  "diagram": null,
+  "has_statement": true,
+  "has_solution": false,
+  "solution_loc": null,
+  "self_validating": false,
+  "runnable": "local",
+  "est_minutes": 75,
+  "preview": "Banco de preguntas de entrevista DE en Jio (telco): DSA con peso fuerte, conceptos de Spark/Hadoop y SQL conceptual a escala de 400M+ usuarios.",
+  "portfolio_value": "Prep para DE en telco a gran escala; útil por su cobertura amplia de Hadoop/HDFS además de Spark.",
+  "notes": "Solo enunciados conceptuales + tips, sin soluciones escritas. Pesa DSA incluso para roles DE."
+ },
+ {
+  "id": "deprep__interview__ola",
+  "title": "Ola — Data Engineer Interview (DSA · SQL · System Design)",
+  "repo": "Noman654/dataengineer_prep",
+  "repo_local": "repos/dataengineer_prep",
+  "source_url": "https://github.com/Noman654/dataengineer_prep/blob/main/company_interviews/ola/online.md",
+  "path": "company_interviews/ola/online.md",
+  "type": "interview-questions",
+  "scope": "micro",
+  "difficulty": "advanced",
+  "difficulty_source": "inferred",
+  "stack": [
+   "DSA",
+   "SQL",
+   "PySpark",
+   "Kafka",
+   "Spark Streaming",
+   "Airflow",
+   "Data Modeling"
+  ],
+  "cloud": [
+   "agnóstico"
+  ],
+  "rubro": [
+   "mobility",
+   "ride-hailing",
+   "logística"
+  ],
+  "evaluates": [
+   "DSA Medium-Hard (Kadane, merge K listas, sliding window, mediana de stream con dos heaps)",
+   "SQL de rides (top-N por ciudad, rolling avg, lapsed drivers, secuencia A→B→C en ventana)",
+   "modelado de ride-sharing + evolución de esquema + star vs snowflake",
+   "system design de anomalías GPS real-time, earnings batch, surge pricing y data quality"
+  ],
+  "requirements": [
+   "resolver DSA Medium-Hard partiendo de fuerza bruta y optimizando",
+   "resolver SQL de ventana sobre rides",
+   "diseñar pipeline real-time de GPS y batch de earnings con backfill"
+  ],
+  "diagram": null,
+  "has_statement": true,
+  "has_solution": false,
+  "solution_loc": null,
+  "self_validating": false,
+  "runnable": "local",
+  "est_minutes": 90,
+  "preview": "Banco de preguntas de entrevista DE en Ola (mobility): DSA Medium-Hard, SQL de ventana sobre rides y system design de anomalías GPS y surge pricing.",
+  "portfolio_value": "Prep para DE en mobility/ride-hailing; SQL genuinamente difícil y escenarios de streaming geoespacial.",
+  "notes": "Solo enunciados + tips, sin soluciones. Incluye ronda Bar Raiser para senior."
+ },
+ {
+  "id": "deprep__pyspark__window-functions",
+  "title": "PySpark Window Functions — The Consecutive Months Problem (gaps & islands)",
+  "repo": "Noman654/dataengineer_prep",
+  "repo_local": "repos/dataengineer_prep",
+  "source_url": "https://github.com/Noman654/dataengineer_prep/blob/main/pyspark/window_functions.ipynb",
+  "path": "pyspark/window_functions.ipynb",
+  "type": "exercise",
+  "scope": "micro",
+  "difficulty": "intermediate",
+  "difficulty_source": "inferred",
+  "stack": [
+   "PySpark",
+   "Window functions",
+   "Spark SQL"
+  ],
+  "cloud": [
+   "agnóstico"
+  ],
+  "rubro": [
+   "retail/loyalty (genérico)"
+  ],
+  "evaluates": [
+   "Window.partitionBy/orderBy + lag()",
+   "patrón gaps-and-islands para N meses consecutivos",
+   "pensar en window functions en vez de self-joins"
+  ],
+  "requirements": [
+   "listar clientes con compras en 3+ meses consecutivos",
+   "detectar secuencias temporales con lag()",
+   "agrupar islas de meses contiguos por customer_id"
+  ],
+  "diagram": null,
+  "has_statement": true,
+  "has_solution": true,
+  "solution_loc": "pyspark/window_functions.ipynb (notebook narrado con código solución inline)",
+  "self_validating": false,
+  "runnable": "local",
+  "est_minutes": 35,
+  "preview": "Notebook story-driven (pedido de Marketing por Slack) que enseña gaps-and-islands con lag() para hallar clientes con 3+ meses consecutivos de compra.",
+  "portfolio_value": "Demuestra el patrón de entrevista más recurrente (N consecutivos) resuelto idiomáticamente con ventanas.",
+  "notes": "Ejecutable en Colab/Spark local. Pareado con quiz pyspark/quiz/window_functions.md (auto-chequeo con respuestas colapsables)."
+ },
+ {
+  "id": "deprep__pyspark__joins",
+  "title": "PySpark Joins — The Loyalty Reconciliation Nightmare",
+  "repo": "Noman654/dataengineer_prep",
+  "repo_local": "repos/dataengineer_prep",
+  "source_url": "https://github.com/Noman654/dataengineer_prep/blob/main/pyspark/joins.ipynb",
+  "path": "pyspark/joins.ipynb",
+  "type": "exercise",
+  "scope": "micro",
+  "difficulty": "intermediate",
+  "difficulty_source": "inferred",
+  "stack": [
+   "PySpark",
+   "Joins",
+   "Broadcast join",
+   "Spark SQL"
+  ],
+  "cloud": [
+   "agnóstico"
+  ],
+  "rubro": [
+   "retail/loyalty",
+   "POS reconciliation"
+  ],
+  "evaluates": [
+   "diagnóstico de joins que no matchean (tipos/llaves)",
+   "join types para probar cero sign-ups en una tienda (anti/left join)",
+   "optimización de un job de reconciliación lento (skew/broadcast)"
+  ],
+  "requirements": [
+   "arreglar el join loyalty↔POS que devuelve cero matches",
+   "probar con datos que la integración de la tienda 104 está rota",
+   "acelerar la reconciliación de 40 min a minutos"
+  ],
+  "diagram": null,
+  "has_statement": true,
+  "has_solution": true,
+  "solution_loc": "pyspark/joins.ipynb (notebook narrado con código solución inline)",
+  "self_validating": false,
+  "runnable": "local",
+  "est_minutes": 40,
+  "preview": "Notebook story-driven (Store Ops pide arreglar la reconciliación loyalty↔POS): tres bugs reales de joins — mismatch de llaves, anti-join para probar integración rota y tuning de un join lento.",
+  "portfolio_value": "Conecta join types con debugging real de datos y performance; cubre el dolor clásico de reconciliación.",
+  "notes": "Ejecutable en Colab/Spark local. Pareado con quiz pyspark/quiz/joins.md (auto-chequeo con respuestas colapsables)."
+ },
+ {
+  "id": "deprep__pyspark__syntax-cheatsheet",
+  "title": "PySpark Syntax & Functions Cheatsheet (pre-interview review)",
+  "repo": "Noman654/dataengineer_prep",
+  "repo_local": "repos/dataengineer_prep",
+  "source_url": "https://github.com/Noman654/dataengineer_prep/blob/main/pyspark/syntax_cheatsheet.ipynb",
+  "path": "pyspark/syntax_cheatsheet.ipynb",
+  "type": "qa-reference",
+  "scope": "micro",
+  "difficulty": "beginner",
+  "difficulty_source": "inferred",
+  "stack": [
+   "PySpark",
+   "Spark SQL",
+   "DataFrame API",
+   "UDFs"
+  ],
+  "cloud": [
+   "agnóstico"
+  ],
+  "rubro": [
+   "agnóstico"
+  ],
+  "evaluates": [
+   "abstracciones de Spark (RDD vs DataFrame vs Dataset)",
+   "creación de DataFrames y tipos complejos (Array, Struct)",
+   "tipos de UDFs en Spark"
+  ],
+  "requirements": [
+   "repasar formas de crear DataFrames",
+   "reconocer tipos complejos y cuándo usar cada abstracción",
+   "tener a mano la sintaxis de UDFs"
+  ],
+  "diagram": null,
+  "has_statement": true,
+  "has_solution": true,
+  "solution_loc": "pyspark/syntax_cheatsheet.ipynb (referencia con celdas de código ejecutables)",
+  "self_validating": false,
+  "runnable": "local",
+  "est_minutes": 25,
+  "preview": "Cheatsheet ejecutable de sintaxis y funciones PySpark para repasar antes de una entrevista: abstracciones, creación de DataFrames, tipos complejos y UDFs.",
+  "portfolio_value": "Referencia rápida de sintaxis; no es un ejercicio sino material de repaso ejecutable.",
+  "notes": "Notebook de referencia (no plantea un problema a resolver), por eso qa-reference. Ejecutable en Colab/Spark local."
+ },
+ {
+  "id": "deprep__pyspark__data-skew",
+  "title": "Spark Data Skew — The Fix Playbook",
+  "repo": "Noman654/dataengineer_prep",
+  "repo_local": "repos/dataengineer_prep",
+  "source_url": "https://github.com/Noman654/dataengineer_prep/blob/main/pyspark/theory/data_skew.md",
+  "path": "pyspark/theory/data_skew.md (+ pyspark/quiz/data_skew.md)",
+  "type": "qa-reference",
+  "scope": "micro",
+  "difficulty": "advanced",
+  "difficulty_source": "inferred",
+  "stack": [
+   "Spark internals",
+   "AQE",
+   "Broadcast join",
+   "Salting"
+  ],
+  "cloud": [
+   "agnóstico"
+  ],
+  "rubro": [
+   "agnóstico"
+  ],
+  "evaluates": [
+   "diagnóstico de skew (una task lenta vs el resto)",
+   "jerarquía de fixes: AQE skew join → broadcast → salting → agregación en dos fases → rediseño de llave",
+   "explicar por qué un hot key inunda un reducer"
+  ],
+  "requirements": [
+   "reconocer skew en durations de tasks",
+   "elegir el fix correcto según el caso",
+   "justificar el tradeoff de cada técnica"
+  ],
+  "diagram": null,
+  "has_statement": true,
+  "has_solution": true,
+  "solution_loc": "pyspark/quiz/data_skew.md (auto-chequeo con respuestas colapsables)",
+  "self_validating": false,
+  "runnable": "local",
+  "est_minutes": 20,
+  "preview": "Playbook de teoría + quiz sobre data skew, el tema senior por excelencia: cómo se ve en producción y la jerarquía de fixes (AQE→broadcast→salting→two-phase→rediseño).",
+  "portfolio_value": "Tema que separa a quien corrió Spark en prod de quien solo lo escribió; muy preguntado en entrevistas senior.",
+  "notes": "Par teoría+quiz. El quiz trae respuestas (qa-reference). Relacionado con shuffle_and_partitioning."
+ },
+ {
+  "id": "deprep__pyspark__shuffle-and-partitioning",
+  "title": "Spark Shuffle & Partitioning",
+  "repo": "Noman654/dataengineer_prep",
+  "repo_local": "repos/dataengineer_prep",
+  "source_url": "https://github.com/Noman654/dataengineer_prep/blob/main/pyspark/theory/shuffle_and_partitioning.md",
+  "path": "pyspark/theory/shuffle_and_partitioning.md",
+  "type": "qa-reference",
+  "scope": "micro",
+  "difficulty": "advanced",
+  "difficulty_source": "inferred",
+  "stack": [
+   "Spark internals",
+   "Shuffle",
+   "Partitioning"
+  ],
+  "cloud": [
+   "agnóstico"
+  ],
+  "rubro": [
+   "agnóstico"
+  ],
+  "evaluates": [
+   "qué es un shuffle y por qué es caro",
+   "estrategias de particionado y número de particiones",
+   "skew desde el ángulo de los internals del shuffle"
+  ],
+  "requirements": [
+   "explicar el costo del shuffle",
+   "elegir particionado para datasets grandes",
+   "relacionar shuffle con skew"
+  ],
+  "diagram": null,
+  "has_statement": true,
+  "has_solution": false,
+  "solution_loc": null,
+  "self_validating": false,
+  "runnable": "local",
+  "est_minutes": 18,
+  "preview": "Teoría de shuffle y particionado en Spark: por qué el shuffle es caro y cómo elegir el particionado, con el ángulo de internals del skew.",
+  "portfolio_value": "Fundamento de performance de Spark muy preguntado; base para entender skew y tuning.",
+  "notes": "Solo teoría (no tiene quiz pareado en quiz/), por eso has_solution=false."
+ },
+ {
+  "id": "deprep__pyspark__memory-management",
+  "title": "Spark Memory Management & OOM",
+  "repo": "Noman654/dataengineer_prep",
+  "repo_local": "repos/dataengineer_prep",
+  "source_url": "https://github.com/Noman654/dataengineer_prep/blob/main/pyspark/theory/memory_management.md",
+  "path": "pyspark/theory/memory_management.md (+ pyspark/quiz/memory_management.md)",
+  "type": "qa-reference",
+  "scope": "micro",
+  "difficulty": "advanced",
+  "difficulty_source": "inferred",
+  "stack": [
+   "Spark internals",
+   "Memory management",
+   "OOM"
+  ],
+  "cloud": [
+   "agnóstico"
+  ],
+  "rubro": [
+   "agnóstico"
+  ],
+  "evaluates": [
+   "modelo de memoria de executor (storage vs execution)",
+   "causas y manejo de OOM (executor.memory, repartition, evitar collect)",
+   "cache vs persist y niveles de storage"
+  ],
+  "requirements": [
+   "explicar cómo Spark reparte la memoria",
+   "diagnosticar y resolver OOM",
+   "justificar decisiones de cacheo"
+  ],
+  "diagram": null,
+  "has_statement": true,
+  "has_solution": true,
+  "solution_loc": "pyspark/quiz/memory_management.md (auto-chequeo con respuestas colapsables)",
+  "self_validating": false,
+  "runnable": "local",
+  "est_minutes": 18,
+  "preview": "Teoría + quiz de memory management en Spark: modelo de memoria del executor, causas de OOM y cómo resolverlas.",
+  "portfolio_value": "OOM es un follow-up recurrente en rondas de Spark; este par cubre el porqué y el cómo.",
+  "notes": "Par teoría+quiz. El quiz trae respuestas (qa-reference)."
+ },
+ {
+  "id": "deprep__pyspark__catalyst-and-aqe",
+  "title": "Spark Catalyst Optimizer & Adaptive Query Execution (AQE)",
+  "repo": "Noman654/dataengineer_prep",
+  "repo_local": "repos/dataengineer_prep",
+  "source_url": "https://github.com/Noman654/dataengineer_prep/blob/main/pyspark/theory/catalyst_and_aqe.md",
+  "path": "pyspark/theory/catalyst_and_aqe.md (+ pyspark/quiz/catalyst_and_aqe.md)",
+  "type": "qa-reference",
+  "scope": "micro",
+  "difficulty": "advanced",
+  "difficulty_source": "inferred",
+  "stack": [
+   "Spark internals",
+   "Catalyst",
+   "AQE"
+  ],
+  "cloud": [
+   "agnóstico"
+  ],
+  "rubro": [
+   "agnóstico"
+  ],
+  "evaluates": [
+   "cómo optimiza Catalyst un plan de query (predicate pushdown)",
+   "qué aporta AQE en runtime (skew join, coalesce de particiones)",
+   "manejo de esquemas en la optimización"
+  ],
+  "requirements": [
+   "explicar las fases del optimizador",
+   "describir las optimizaciones runtime de AQE",
+   "relacionar predicate pushdown con performance"
+  ],
+  "diagram": null,
+  "has_statement": true,
+  "has_solution": true,
+  "solution_loc": "pyspark/quiz/catalyst_and_aqe.md (auto-chequeo con respuestas colapsables)",
+  "self_validating": false,
+  "runnable": "local",
+  "est_minutes": 18,
+  "preview": "Teoría + quiz sobre el Catalyst Optimizer y AQE: cómo se optimiza un plan de consulta y qué decide Spark en runtime.",
+  "portfolio_value": "Internals de optimización preguntados en rondas de Spark; útil para explicar el 'por qué' de la performance.",
+  "notes": "Par teoría+quiz. El quiz trae respuestas (qa-reference)."
+ },
+ {
+  "id": "deprep__pyspark__spark-ui-debugging",
+  "title": "Spark UI Debugging — Diagnosing Slow Jobs",
+  "repo": "Noman654/dataengineer_prep",
+  "repo_local": "repos/dataengineer_prep",
+  "source_url": "https://github.com/Noman654/dataengineer_prep/blob/main/pyspark/theory/spark_ui_debugging.md",
+  "path": "pyspark/theory/spark_ui_debugging.md (+ pyspark/quiz/spark_ui_debugging.md)",
+  "type": "qa-reference",
+  "scope": "micro",
+  "difficulty": "advanced",
+  "difficulty_source": "inferred",
+  "stack": [
+   "Spark internals",
+   "Spark UI",
+   "Performance debugging"
+  ],
+  "cloud": [
+   "agnóstico"
+  ],
+  "rubro": [
+   "agnóstico"
+  ],
+  "evaluates": [
+   "leer stages/tasks en la Spark UI",
+   "identificar skew, spill y shuffles costosos",
+   "diagnosticar por qué un job va lento"
+  ],
+  "requirements": [
+   "interpretar la Spark UI para hallar cuellos de botella",
+   "asociar síntomas (task lenta, spill) a causas",
+   "proponer fixes a partir del diagnóstico"
+  ],
+  "diagram": null,
+  "has_statement": true,
+  "has_solution": true,
+  "solution_loc": "pyspark/quiz/spark_ui_debugging.md (auto-chequeo con respuestas colapsables)",
+  "self_validating": false,
+  "runnable": "local",
+  "est_minutes": 18,
+  "preview": "Teoría + quiz para debuggear jobs lentos con la Spark UI: cómo leer stages/tasks e identificar skew, spill y shuffles caros.",
+  "portfolio_value": "Habilidad práctica de tuning muy valorada; aterriza el follow-up 'tu job va lento, ¿cómo lo debuggeás?'.",
+  "notes": "Par teoría+quiz. El quiz trae respuestas (qa-reference)."
+ },
+ {
+  "id": "deprep__data-modeling__dimensional-modeling",
+  "title": "Dimensional Modeling — Kimball Star Schemas (theory + quiz)",
+  "repo": "Noman654/dataengineer_prep",
+  "repo_local": "repos/dataengineer_prep",
+  "source_url": "https://github.com/Noman654/dataengineer_prep/blob/main/data_modeling/theory/dimensional_modeling.md",
+  "path": "data_modeling/theory/dimensional_modeling.md (+ data_modeling/quiz/dimensional_modeling.md)",
+  "type": "qa-reference",
+  "scope": "micro",
+  "difficulty": "intermediate",
+  "difficulty_source": "inferred",
+  "stack": [
+   "Data Modeling",
+   "Kimball",
+   "Star Schema"
+  ],
+  "cloud": [
+   "agnóstico"
+  ],
+  "rubro": [
+   "agnóstico"
+  ],
+  "evaluates": [
+   "fact vs dimension y la noción de grain",
+   "proceso Kimball de 4 pasos para diseñar un esquema",
+   "responder 'diseñá un esquema para X' como senior, no listando tablas"
+  ],
+  "requirements": [
+   "declarar el grain de la tabla de hechos",
+   "identificar dimensiones (quién/qué/dónde/cuándo)",
+   "aplicar el proceso Kimball a un proceso de negocio"
+  ],
+  "diagram": null,
+  "has_statement": true,
+  "has_solution": true,
+  "solution_loc": "data_modeling/quiz/dimensional_modeling.md (auto-chequeo con respuestas colapsables, 🟢→🟡→⚡)",
+  "self_validating": false,
+  "runnable": "local",
+  "est_minutes": 20,
+  "preview": "Teoría + quiz de modelado dimensional Kimball: fact/dimension, el concepto de grain y el proceso de 4 pasos que toda entrevista pide al pedir 'diseñá un esquema'.",
+  "portfolio_value": "Base de todas las preguntas de modelado de las entrevistas del repo; el grain es el diferenciador junior/senior.",
+  "notes": "Par teoría+quiz con mezcla de dificultad explícita (basics→senior). El quiz trae respuestas."
+ },
+ {
+  "id": "deprep__data-modeling__slowly-changing-dimensions",
+  "title": "Slowly Changing Dimensions (SCD Types 0–6) — theory + quiz",
+  "repo": "Noman654/dataengineer_prep",
+  "repo_local": "repos/dataengineer_prep",
+  "source_url": "https://github.com/Noman654/dataengineer_prep/blob/main/data_modeling/theory/slowly_changing_dimensions.md",
+  "path": "data_modeling/theory/slowly_changing_dimensions.md (+ data_modeling/quiz/slowly_changing_dimensions.md)",
+  "type": "qa-reference",
+  "scope": "micro",
+  "difficulty": "intermediate",
+  "difficulty_source": "inferred",
+  "stack": [
+   "Data Modeling",
+   "SCD",
+   "Dimensions"
+  ],
+  "cloud": [
+   "agnóstico"
+  ],
+  "rubro": [
+   "agnóstico"
+  ],
+  "evaluates": [
+   "tipos de SCD 0 a 6 y sus tradeoffs (simplicidad/storage/historia)",
+   "elegir el tipo correcto según frecuencia de cambio y necesidad point-in-time",
+   "hacer la pregunta correcta antes de responder 'Type 2' reflejamente"
+  ],
+  "requirements": [
+   "distinguir los SCD types y cuándo aplica cada uno",
+   "justificar la elección con criterio de point-in-time vs current state",
+   "reconocer la señal junior (Type 2 reflejo) vs senior"
+  ],
+  "diagram": null,
+  "has_statement": true,
+  "has_solution": true,
+  "solution_loc": "data_modeling/quiz/slowly_changing_dimensions.md (auto-chequeo con respuestas colapsables)",
+  "self_validating": false,
+  "runnable": "local",
+  "est_minutes": 18,
+  "preview": "Teoría + quiz de Slowly Changing Dimensions (Types 0–6): los tradeoffs de cada tipo y cómo elegir con criterio, no por reflejo.",
+  "portfolio_value": "Uno de los temas de modelado más preguntados; conocer Types 0–6 (no solo 1 y 2) señala seniority.",
+  "notes": "Par teoría+quiz. El quiz trae respuestas (qa-reference)."
+ },
+ {
+  "id": "deprep__data-modeling__modeling-approaches",
+  "title": "Modeling Approaches — Kimball vs Inmon vs Data Vault vs OBT",
+  "repo": "Noman654/dataengineer_prep",
+  "repo_local": "repos/dataengineer_prep",
+  "source_url": "https://github.com/Noman654/dataengineer_prep/blob/main/data_modeling/theory/modeling_approaches.md",
+  "path": "data_modeling/theory/modeling_approaches.md (+ data_modeling/quiz/modeling_approaches.md)",
+  "type": "qa-reference",
+  "scope": "micro",
+  "difficulty": "advanced",
+  "difficulty_source": "inferred",
+  "stack": [
+   "Data Modeling",
+   "Kimball",
+   "Inmon",
+   "Data Vault",
+   "OBT"
+  ],
+  "cloud": [
+   "agnóstico"
+  ],
+  "rubro": [
+   "agnóstico"
+  ],
+  "evaluates": [
+   "filosofía y tradeoffs de Kimball, Inmon, Data Vault y OBT",
+   "elegir el enfoque según el problema (no hay 'mejor' absoluto)",
+   "conformed dimensions y consistencia entre stars"
+  ],
+  "requirements": [
+   "contrastar bottom-up vs top-down vs hub-link-satellite vs one-big-table",
+   "justificar qué enfoque usar para un caso dado",
+   "explicar cuándo OBT es atajo válido"
+  ],
+  "diagram": null,
+  "has_statement": true,
+  "has_solution": true,
+  "solution_loc": "data_modeling/quiz/modeling_approaches.md (auto-chequeo con respuestas colapsables)",
+  "self_validating": false,
+  "runnable": "local",
+  "est_minutes": 18,
+  "preview": "Teoría + quiz comparando enfoques de modelado (Kimball/Inmon/Data Vault/OBT): pregunta senior que evalúa entender tradeoffs, no definiciones.",
+  "portfolio_value": "Demuestra criterio arquitectónico de warehouse; diferencia a quien elige enfoque con justificación.",
+  "notes": "Par teoría+quiz. El quiz trae respuestas (qa-reference)."
+ }
+]

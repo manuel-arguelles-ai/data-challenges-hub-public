@@ -1,0 +1,244 @@
+[
+ {
+  "id": "genai__hls-llm-doc-qa",
+  "title": "Biomedical Document Q&A with RAG, Databricks Vector Search and open-source LLMs",
+  "repo": "databricks-industry-solutions/hls-llm-doc-qa",
+  "repo_local": "repos/hls-llm-doc-qa",
+  "source_url": "https://github.com/databricks-industry-solutions/hls-llm-doc-qa/blob/main/README.md",
+  "path": ".",
+  "type": "project",
+  "scope": "end-to-end",
+  "difficulty": "advanced",
+  "difficulty_source": "inferred",
+  "stack": [
+   "Retrieval Augmented Generation (RAG)",
+   "Databricks Vector Search",
+   "LangChain",
+   "Foundation Model API (DBRX Instruct)",
+   "BGE / sentence-transformers embeddings",
+   "Hugging Face transformers",
+   "MLflow",
+   "PyPDF / unstructured (PDF chunking)",
+   "PySpark"
+  ],
+  "cloud": [
+   "Databricks-pure"
+  ],
+  "rubro": [
+   "salud"
+  ],
+  "evaluates": "Construir un pipeline RAG end-to-end sobre un corpus biomedico (papers PDF de PubMed sobre fibrosis quistica): ingerir y chunkar documentos con LangChain, generar embeddings con un modelo BGE/sentence-transformers, indexarlos en Databricks Vector Search, y orquestar un LLMChain con un foundation model open-source (DBRX Instruct via Foundation Model API) para responder preguntas citando el contexto recuperado. Evalua RAG, vector search, embeddings, prompt engineering y despliegue de LLM en Databricks.",
+  "requirements": [
+   "Organizar el corpus de PDFs en DBFS/S3 y prepararlo para ingesta",
+   "Usar LangChain para cargar y dividir los documentos en chunks manejables con un text splitter",
+   "Generar embeddings de los chunks con un modelo BGE/sentence-transformers y poblar un indice de Databricks Vector Search",
+   "Construir un retriever sobre el indice y un LLMChain de LangChain apuntando al foundation model DBRX Instruct via FMAPI",
+   "Disenar el prompt para grounding/citacion del contexto recuperado y responder preguntas de dominio salud",
+   "Ejecutar el accelerator como multi-step job via RUNME (no interactivo)"
+  ],
+  "diagram": "graph LR\n  PDF[PubMed PDFs corpus] -->|LangChain load + split| CH[Text chunks]\n  CH -->|BGE / sentence-transformers| EMB[Embeddings]\n  EMB --> VS[(Databricks Vector Search index)]\n  Q[User question] -->|embed| VS\n  VS -->|top-k context| CHAIN[LangChain LLMChain]\n  CHAIN -->|prompt + context| LLM[DBRX Instruct - Foundation Model API]\n  LLM --> ANS[Grounded answer]",
+  "has_statement": true,
+  "has_solution": true,
+  "solution_loc": "02-Data-prep-with-LangChain.py (chunking + embeddings + Vector Search index), 03-LLM-Chain-with-FMAPI.py (retriever + LLMChain con DBRX), [WIP] 04-Deploy-Llama-3-to-GPU-Serving.py, RUNME.py",
+  "self_validating": false,
+  "runnable": "databricks",
+  "est_minutes": 180,
+  "preview": "Accelerator oficial de Databricks (rubro salud): Q&A sobre papers biomedicos con RAG, Databricks Vector Search, embeddings BGE y el foundation model DBRX Instruct orquestado con LangChain.",
+  "portfolio_value": "Pieza GenAI fuerte: muestra un RAG completo (ingesta PDF -> chunking -> embeddings -> vector search -> LLM grounded) con foundation models open-source sobre Databricks puro, en un caso de dominio regulado (HLS). Diferencia un perfil porque integra LangChain + Vector Search + FMAPI en un flujo de produccion.",
+  "notes": "README documenta CLOUD-ALL (Databricks puro, sin recursos cloud externos). Usa DBRX Instruct via Foundation Model API; el notebook 04 (deploy de Llama 3 a GPU serving) esta marcado WIP. Diferentes ramas del repo (hls-llm-qa-gpu, basic-qa-LLM-HLS) sirven variantes de imagenes; el flujo principal vive en main."
+ },
+ {
+  "id": "genai__mfg-llm-qa-bot",
+  "title": "Manufacturing Q&A Bot with RAG, Vector Search and swappable Foundation/Custom LLMs",
+  "repo": "databricks-industry-solutions/mfg-llm-qa-bot",
+  "repo_local": "repos/mfg-llm-qa-bot",
+  "source_url": "https://github.com/databricks-industry-solutions/mfg-llm-qa-bot/blob/main/README.md",
+  "path": ".",
+  "type": "project",
+  "scope": "end-to-end",
+  "difficulty": "advanced",
+  "difficulty_source": "inferred",
+  "stack": [
+   "Retrieval Augmented Generation (RAG)",
+   "Databricks Vector Search",
+   "LangChain (agents + chains)",
+   "Foundation Model API",
+   "External Models",
+   "Custom PyFunc LLM (MLflow)",
+   "Hugging Face embeddings / transformers",
+   "Unity Catalog Model Registry",
+   "MLflow Model Serving",
+   "Gradio"
+  ],
+  "cloud": [
+   "Databricks-pure"
+  ],
+  "rubro": [
+   "manufactura"
+  ],
+  "evaluates": "Construir un bot Q&A de manufactura con RAG sobre fichas tecnicas de quimicos (PDF): crear embeddings y un indice de Databricks Vector Search, y ensamblar la app con tres patrones de LLM intercambiables (foundation model, external model y custom PyFunc), incluyendo un patron compound-AI con LangChain Agents (Wikipedia). Registrar el modelo en Unity Catalog, desplegarlo en Model Serving y exponerlo en una app Gradio. Evalua RAG, vector search, embeddings, prompt engineering, foundation models y despliegue de LLM.",
+  "requirements": [
+   "Cargar y chunkar las fichas tecnicas (NJ Chemical Data Fact Sheets) con LangChain y PyPDF",
+   "Generar embeddings con un modelo de Hugging Face y poblar un indice de Databricks Vector Search (antes FAISS)",
+   "Definir la logica de busqueda en 3 variantes: foundation model, LangChain Agents (compound AI) y custom PyFunc",
+   "Ensamblar la app RAG (retriever + prompt + LLM) para el patron foundational y el custom",
+   "Registrar el modelo en Unity Catalog Model Registry y desplegarlo en MLflow Model Serving",
+   "Servir una app Gradio self-hosted que consuma el endpoint del modelo"
+  ],
+  "diagram": "graph LR\n  PDF[Chemical fact sheets PDF] -->|LangChain + PyPDF chunk| CH[Chunks]\n  CH -->|HuggingFace embeddings| VS[(Databricks Vector Search index)]\n  Q[User question] --> RET[Retriever]\n  VS --> RET\n  RET -->|context + prompt| LLM{LLM pattern}\n  LLM -->|2.1->3.1->4.1| FM[Foundation / External Model]\n  LLM -->|2.3->3.3->4.3| PF[Custom PyFunc model]\n  LLM -->|2.2| AG[LangChain Agents - compound AI]\n  FM --> REG[Unity Catalog Model Registry]\n  PF --> REG\n  REG --> SRV[MLflow Model Serving]\n  SRV --> APP[Gradio app]",
+  "has_statement": true,
+  "has_solution": true,
+  "solution_loc": "01_Create_Embeddings.py (Vector Search index), 02.1/02.2/02.3 (search: foundational / Langchain agents / custom), 03.1/03.3 (build model), 04.1/04.3 (assemble app), 05_Deploy_Model.py (UC registry + serving), 06_Example_App.py (Gradio)",
+  "self_validating": false,
+  "runnable": "databricks",
+  "est_minutes": 240,
+  "preview": "Accelerator oficial de Databricks (manufactura): bot Q&A con RAG y Databricks Vector Search sobre fichas de quimicos, con LLM intercambiable (foundation / external / custom PyFunc + LangChain Agents), registro en UC y app Gradio en Model Serving.",
+  "portfolio_value": "Muestra dominio amplio de GenAI en Databricks: el mismo RAG resuelto con tres arquitecturas de modelo (foundation, external, custom PyFunc) mas un patron compound-AI con agentes, mas el ciclo MLOps completo (UC Model Registry -> Model Serving -> Gradio). Ideal para evidenciar criterio de diseno LLM end-to-end.",
+  "notes": "README New Features (Mar 2024): migracion de FAISS a Databricks Vector Search. DBR 11.0+. Requiere token de Hugging Face configurado en /utils. Las cadenas de notebooks 2.x->3.x->4.x corresponden a cada patron de modelo."
+ },
+ {
+  "id": "genai__csrd_assistant",
+  "title": "CSRD Regulatory Compliance Assistant: graph-aware RAG over ESRS reporting standards",
+  "repo": "databricks-industry-solutions/csrd_assistant",
+  "repo_local": "repos/csrd_assistant",
+  "source_url": "https://github.com/databricks-industry-solutions/csrd_assistant/blob/main/README.md",
+  "path": ".",
+  "type": "project",
+  "scope": "end-to-end",
+  "difficulty": "advanced",
+  "difficulty_source": "inferred",
+  "stack": [
+   "Retrieval Augmented Generation (RAG)",
+   "Databricks Vector Search",
+   "LangChain (custom BaseRetriever)",
+   "ChatDatabricks foundation model (DBRX Instruct)",
+   "Knowledge graph (networkx + pyvis)",
+   "BeautifulSoup (HTML parsing)",
+   "Multi-stage reasoning",
+   "Delta Lake",
+   "PySpark"
+  ],
+  "cloud": [
+   "Databricks-pure"
+  ],
+  "rubro": [
+   "finanzas",
+   "regulatorio"
+  ],
+  "evaluates": "Construir un asistente de cumplimiento regulatorio sobre la directiva CSRD/ESRS con RAG aumentado por grafo de conocimiento: parsear el texto legal a nodos/aristas (articulos y referencias cruzadas), indexar el contenido en Databricks Vector Search, y extender un BaseRetriever de LangChain para expandir la busqueda 1-hop a articulos referenciados antes de responder con un foundation model (DBRX Instruct via ChatDatabricks). Evalua RAG, vector search, embeddings, prompt engineering, razonamiento multi-etapa y despliegue de LLM en un dominio regulatorio.",
+  "requirements": [
+   "Parsear la directiva CSRD (HTML/legal) a un grafo de articulos y referencias con BeautifulSoup y networkx",
+   "Persistir nodos y aristas como tablas Delta y visualizar el grafo con pyvis",
+   "Sincronizar el contenido de alta calidad a un indice de Databricks Vector Search via LangChain",
+   "Implementar similarity search con relevance scores y filtros por tipo de nodo (PARAGRAPH/ARTICLE)",
+   "Extender BaseRetriever para enriquecer el contexto recuperado con nodos referenciados (1-hop en el grafo)",
+   "Encadenar el retriever graph-aware con ChatDatabricks (DBRX) para responder citando articulos del CSRD"
+  ],
+  "diagram": "graph LR\n  REG[CSRD / ESRS legal text] -->|BeautifulSoup parse| G[Knowledge graph nodes+edges]\n  G -->|Delta tables| DLT[(nodes / edges Delta)]\n  G -->|high-quality content| VS[(Databricks Vector Search index)]\n  Q[Compliance question] -->|similarity search| VS\n  VS -->|top match| RET[Graph-aware BaseRetriever]\n  DLT -->|1-hop referenced articles| RET\n  RET -->|expanded context + prompt| LLM[ChatDatabricks DBRX Instruct]\n  LLM --> ANS[Answer citing CSRD articles]",
+  "has_statement": true,
+  "has_solution": true,
+  "solution_loc": "01_csrd_parsing.py (parse a grafo + Delta), 02_csrd_search.py (Databricks Vector Search + similarity search), 03_csrd_references.py (referencias del grafo), 04_csrd_assistant.py (BaseRetriever graph-aware + ChatDatabricks RAG), app/, config/00_environment",
+  "self_validating": false,
+  "runnable": "databricks",
+  "est_minutes": 210,
+  "preview": "Accelerator oficial Databricks + Deloitte (finanzas/regulatorio): asistente de cumplimiento CSRD que combina un grafo de conocimiento de la regulacion con RAG sobre Databricks Vector Search y razonamiento multi-etapa con DBRX para responder citando articulos.",
+  "portfolio_value": "Pieza GenAI avanzada y distintiva: no es un RAG plano sino un RAG aumentado por grafo (custom BaseRetriever que navega referencias legales 1-hop). Demuestra prompt engineering, vector search, foundation models y razonamiento multi-etapa en un caso regulatorio real, alineado a un perfil GenAI Engineer senior.",
+  "notes": "README: DBR 15.0ML, colaboracion Databricks + Deloitte. Usa langchain + langchain-openai en deps pero el chat model del flujo es ChatDatabricks endpoint databricks-dbrx-instruct. El grafo se construye con networkx y se visualiza con pyvis."
+ },
+ {
+  "id": "genai__llm_recommender",
+  "title": "LLM Product Recommender: generative suggestions grounded in catalog via Vector Search",
+  "repo": "databricks-industry-solutions/llm_recommender",
+  "repo_local": "repos/llm_recommender",
+  "source_url": "https://github.com/databricks-industry-solutions/llm_recommender/blob/main/README.md",
+  "path": ".",
+  "type": "project",
+  "scope": "end-to-end",
+  "difficulty": "intermediate",
+  "difficulty_source": "inferred",
+  "stack": [
+   "Retrieval Augmented Generation (RAG)",
+   "Databricks Vector Search",
+   "Foundation Model (databricks-genai-inference ChatCompletion)",
+   "sentence-transformers embeddings",
+   "Hugging Face datasets",
+   "MLflow (model serving / deployments)",
+   "Unity Catalog",
+   "PySpark"
+  ],
+  "cloud": [
+   "Databricks-pure"
+  ],
+  "rubro": [
+   "retail"
+  ],
+  "evaluates": "Construir un recomendador de productos que combina un LLM (foundation model) con busqueda vectorial sobre el catalogo: prompt-engineering para que el LLM genere recomendaciones generalizadas a partir de items preferidos, generacion de embeddings del catalogo con sentence-transformers, indexacion en Databricks Vector Search, y ensamblado de una funcion end-to-end que intersecta las sugerencias generales con SKUs reales del inventario. Evalua RAG, vector search, embeddings, prompt engineering, foundation models y despliegue de LLM.",
+  "requirements": [
+   "Cargar el catalogo de productos a una tabla en Unity Catalog (solacc_uc.llm_recommender)",
+   "Generar embeddings de las descripciones de producto con sentence-transformers y crear un indice de Databricks Vector Search en sync con la tabla",
+   "Disenar el prompt que hace que el foundation model genere recomendaciones generalizadas a partir de items preferidos",
+   "Convertir las recomendaciones generales en embeddings y hacer similarity search para mapearlas a SKUs concretos del catalogo",
+   "Ensamblar la logica completa en una unica funcion (recibir items -> recomendar -> intersectar catalogo)",
+   "Preparar el despliegue del recomendador para consumo desde una app externa (endpoints + workspace URL)"
+  ],
+  "diagram": "graph LR\n  CAT[Product catalog UC table] -->|sentence-transformers| EMB[Product embeddings]\n  EMB --> VS[(Databricks Vector Search index)]\n  PREF[Preferred items] -->|prompt| LLM[Foundation Model ChatCompletion]\n  LLM -->|generalized suggestions| GEN[e.g. winter boots]\n  GEN -->|embed + similarity search| VS\n  VS -->|matching SKUs| OUT[Specific product recommendations]\n  OUT --> APP[External app via serving endpoint]",
+  "has_statement": true,
+  "has_solution": true,
+  "solution_loc": "00_Intro_and_Config.py (config UC + VS index), 01_Prepare_Product_Search_Data.py (embeddings + Vector Search), 02_Create_General_Recommendations.py (prompt al foundation model), 03_Assemble_Recommender.py (funcion end-to-end + deploy), RUNME.py",
+  "self_validating": false,
+  "runnable": "databricks",
+  "est_minutes": 150,
+  "preview": "Accelerator oficial de Databricks (retail/e-commerce): recomendador que usa un foundation model para generar sugerencias generales y las aterriza en SKUs reales del catalogo via Databricks Vector Search y embeddings sentence-transformers.",
+  "portfolio_value": "Caso GenAI claro para retail: muestra como combinar generacion (LLM) con recuperacion (vector search) para resolver la limitacion de un recomendador puramente generativo, aterrizando sugerencias en inventario real. Buen ejemplo de RAG aplicado a recomendacion, no a Q&A.",
+  "notes": "El README del repo es la plantilla generica sin completar (placeholders 'business problem', 'john.doe@'); el contenido real se extrajo de los notebooks. ML 14.2 cluster. Usa databricks-genai-inference ChatCompletion + databricks-vectorsearch + mlflow[genai]>=2.9.0. Catalog UC: solacc_uc.llm_recommender, indice product_index."
+ },
+ {
+  "id": "genai__slack-bot-rag",
+  "title": "Enterprise GenAI Slack Bot: Java/Spring front-end to a RAG model served on MLflow",
+  "repo": "databricks-industry-solutions/slack-bot-rag",
+  "repo_local": "repos/slack-bot-rag",
+  "source_url": "https://github.com/databricks-industry-solutions/slack-bot-rag/blob/main/README.md",
+  "path": ".",
+  "type": "project",
+  "scope": "end-to-end",
+  "difficulty": "advanced",
+  "difficulty_source": "inferred",
+  "stack": [
+   "Retrieval Augmented Generation (RAG)",
+   "MLflow Model Serving endpoint",
+   "Databricks Vector Search",
+   "LangChain (pyfunc RAG model)",
+   "Foundation Model",
+   "Unity Catalog",
+   "Java 11 / Spring Boot",
+   "Spring JMS (async)",
+   "Slack Bolt API",
+   "H2 / online datastore"
+  ],
+  "cloud": [
+   "Databricks-pure"
+  ],
+  "rubro": [
+   "generico"
+  ],
+  "evaluates": "Construir la capa de integracion enterprise para un modelo RAG: empaquetar un modelo RAG (Vector Search + LangChain + foundation model) como pyfunc en MLflow y servirlo via Model Serving endpoint, y exponerlo a Slack mediante una aplicacion Java/Spring Boot asincrona (JMS) que escucha eventos y acciones, persiste auditoria de conversaciones y captura feedback del usuario para iterar la estrategia RAG. Evalua RAG, vector search, foundation models, prompt engineering y despliegue/serving de LLM a escala enterprise.",
+  "requirements": [
+   "Validar la compatibilidad del modelo RAG como funcion python (pyfunc) en MLflow usando el notebook companion",
+   "Configurar Unity Catalog (catalog/schema/tabla) y un indice de Databricks Vector Search, mas el secret para autenticar el serving endpoint",
+   "Registrar y desplegar el modelo RAG en un MLflow Model Serving endpoint load-balanceable",
+   "Implementar la app Java/Spring Boot que escucha eventos de Slack (app_mention, messages.channel) y responde en hilos",
+   "Procesar las peticiones de forma asincrona con Spring JMS para cumplir la latencia <3s de Slack, delegando el RAG al endpoint MLflow con historial conversacional",
+   "Persistir registros de auditoria y capturar feedback (botones interactivos util/no util) para adaptar/fine-tunear la estrategia RAG"
+  ],
+  "diagram": "graph LR\n  DOC[Knowledge base] -->|embeddings| VS[(Databricks Vector Search)]\n  VS --> RAGM[RAG pyfunc model - LangChain + foundation model]\n  RAGM -->|register| MLF[MLflow Model Serving endpoint]\n  SLACK[Slack events / actions] --> APP[Java Spring Boot app]\n  APP -->|async JMS, <3s| MLF\n  MLF -->|grounded answer| APP\n  APP -->|reply in thread| SLACK\n  APP -->|audit + feedback| DS[(Datastore H2 / DB)]\n  DS -->|useful flag| RAGM",
+  "has_statement": true,
+  "has_solution": true,
+  "solution_loc": "slack-bot-genai.ipynb (pyfunc RAG model + UC/Vector Search + MLflow serving), src/ (Java Spring Boot app: event/action listeners, JMS, persistence), pom.xml",
+  "self_validating": false,
+  "runnable": "databricks",
+  "est_minutes": 210,
+  "preview": "Accelerator oficial de Databricks (generico): interfaz Slack enterprise a un modelo RAG servido en MLflow; el RAG (Vector Search + LangChain + foundation model) se delega al endpoint y una app Java/Spring Boot asincrona maneja eventos, auditoria y feedback.",
+  "portfolio_value": "Diferenciador para un perfil GenAI Engineer: se enfoca en lo que casi nadie muestra, la arquitectura e ingenieria para llevar un RAG de POC a produccion enterprise (serving load-balanceado, latencia <3s con JMS async, auditoria, feedback loop). Combina notebook de modelado RAG en Databricks con una app Java/Spring real.",
+  "notes": "README: DBR 14.2ML, autor Antoine Amend. El modelo RAG en si esta explicitamente fuera de scope y se delega a un endpoint MLflow (referencia al demo Lakehouse AI chatbot); el repo aporta el notebook companion pyfunc (databricks-vectorsearch 0.21, langchain, mlflow[databricks]) y la capa Java/Spring. Compila con Maven 3.8.5 + Java 11; deploy via jar o docker (Lakehouse Apps)."
+ }
+]

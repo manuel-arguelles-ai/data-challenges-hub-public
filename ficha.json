@@ -1,0 +1,50 @@
+{
+  "titulo_es": "Databricks Challenges Hub",
+  "titulo_en": "Databricks Challenges Hub",
+  "resumen_es": "Catálogo interactivo de 368 pruebas técnicas y ejercicios de Databricks (DE, DA y ML) con glosario de 50 términos. Se construyó con un agente por grupo de repos escribiendo un JSON parcial y un merge determinista que valida y deduplica; el resultado es reproducible byte a byte.",
+  "resumen_en": "Interactive catalog of 368 Databricks technical challenges and exercises (DE, DA and ML) with a 50-term glossary. It was built with one agent per repo group writing a partial JSON, followed by a deterministic merge that validates and deduplicates; the output is byte-for-byte reproducible.",
+  "puntos_es": [
+    "368 ítems: 62 end-to-end y 306 micro, con deep-link al archivo exacto de cada repo fuente",
+    "26 JSON parciales escritos por agentes en paralelo y merge sin LLM que valida campos, enums y duplicados",
+    "Filtros multi-select, modo Priorizar con ranking, etiquetas de rol (DE/DA/ML) y plataforma",
+    "Foquito opcional que explica texto seleccionado vía Groq con la clave solo en el servidor y rate limit",
+    "Límites documentados: descripciones y dificultad generadas por LLM, etiquetas por reglas de palabras clave"
+  ],
+  "puntos_en": [
+    "368 items: 62 end-to-end and 306 micro, each deep-linked to the exact file in its source repo",
+    "26 partial JSON files written by parallel agents plus an LLM-free merge that validates fields, enums and duplicates",
+    "Multi-select filters, a Prioritize mode with ranking, and role (DE/DA/ML) and platform tags",
+    "Optional tooltip that explains selected text via Groq, with the key kept server-side and rate limiting",
+    "Documented limits: LLM-generated descriptions and difficulty, keyword-rule tags"
+  ],
+  "stack": [
+    "Python",
+    "JavaScript",
+    "HTML",
+    "Mermaid",
+    "PHP",
+    "Groq API",
+    "Databricks"
+  ],
+  "tags": [
+    "databricks",
+    "data-engineering",
+    "catalogo",
+    "agentes-en-paralelo",
+    "merge-determinista",
+    "portafolio"
+  ],
+  "cat": "Agentes y workflows",
+  "tipo": "proyecto",
+  "descripcion_repo_corta_en": "Interactive catalog of 368 Databricks challenges, built by parallel agents and a deterministic merge",
+  "topics": [
+    "databricks",
+    "data-engineering",
+    "delta-lake",
+    "spark",
+    "interview-questions",
+    "portfolio",
+    "catalog",
+    "parallel-agents"
+  ]
+}
