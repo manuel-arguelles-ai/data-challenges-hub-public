@@ -1,4 +1,4 @@
-# Databricks Challenges Hub
+# Data Challenges Hub
 
 Catálogo interactivo de **368 pruebas técnicas y ejercicios** de Databricks (Data Engineering, Data Analytics y ML) pensado para que personas junior armen su portafolio resolviendo material real y no demos cortas. Incluye un glosario de 50 términos y un "foquito" opcional que explica con un LLM cualquier texto seleccionado.
 
